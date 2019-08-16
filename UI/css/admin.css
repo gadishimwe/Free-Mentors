@@ -1,0 +1,507 @@
+/* Mobile first CSS model */
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+h1,h3{
+    color: #0d0d0d;
+}
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.2em;
+    color: #586069;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* Header */
+
+header{
+    width: 100%;
+    font-size: 18px;
+    height: 80px;
+}
+.container{
+    position: fixed;
+    width: 100%;
+    height: 80px;
+    background: white;
+    border-bottom: #3359df solid 5px;
+}
+
+.logo-and-menu{
+    width: 100%;
+    height: 100%;
+    padding: 7.5px;
+    float: left;
+}
+.logo{
+    float: left;
+    width: 100px;
+    height: 100%;
+    background: url(../assets/logo.png);
+    background-position: center;
+    background-size: cover;
+}
+.menu{
+    float: right;
+    margin-top: 20px;
+}
+.menu:hover{
+    cursor: pointer;
+}
+.menu div{
+    background: #0067fc;
+    width: 30px;
+    height: 4px;
+    margin: 5px;
+    border-radius: 2em;
+    transition: 0.3s ease;
+}
+.line3{
+    margin-top: -9px !important;
+}
+.navigation{
+    display: none;
+}
+.my-profile, .my-users{
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    text-align: start;
+    color: #586069;
+    width: 240px;
+    padding: 5px;
+    margin: 5px;
+    box-shadow: 0 2px 4px rgba(27,31,35,.15);
+    border-radius: 3px;
+}
+.my-users{
+    grid-template-columns: 1fr 3fr;
+    height: 40px;
+    margin-left: 30px;
+    width: 210px;
+}
+.my-profile .profile-photo{
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    background: url(../assets/profile-white.png) #0067fc;
+    background-position: center;
+    background-size: cover;
+    border: #0067fc solid 2px;
+    border-radius: 50%;
+    margin: 10px;
+}
+.my-profile .names{
+    padding-top: 25px;
+    overflow: hidden;
+}
+.my-profile .expand div{
+    width: 20px;
+    height: 20px;
+    margin-top: 27px;
+    background: url(../assets/expand.png);
+    background-position: center;
+    background-size: cover;
+}
+.sub-menu{
+    display: none;
+}
+.my-profile:hover{
+    cursor: pointer;
+}
+.my-profile:hover .sub-menu{
+    display: block;
+    position: absolute;
+    margin-top: 70px;
+    width: 200px;
+    background: white;
+    border: #586069 solid 1px;
+    box-shadow: 0 5px 7px rgba(27,31,35,.15);
+
+}
+.my-profile:hover .sub-menu ul{
+    list-style: none;
+}
+.my-profile:hover .sub-menu a{
+    display: block;
+    text-decoration: none;
+    width: 100%;
+    padding: 10px;
+    color: #586069;
+}
+.sub-menu a:hover{
+    background: #0067fc;
+    color: white !important;
+}
+.sub-menu a:active{
+    background: #3359df;
+}
+.search-bar{
+    height: 44px;
+    padding: 3px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.search-bar input{
+    outline: none;
+    height: 35px;
+    width: 200px;
+    font-size: 1rem;
+    border-radius: 2rem;
+    border: #9c9c9ccb solid 2px;
+    padding-left: 10px;
+    margin-top: 2px;
+}
+.search-bar input:hover{
+    border: none;
+    box-shadow: 0 2px 4px rgba(27, 31, 35, 0.404);
+}
+.search-bar a{
+    display: block;
+    width: 40px;
+    height: 40px;
+    padding: 5px;
+}
+.search-bar a div{
+    width: 100%;
+    height: 100%;
+    background: url(../assets/search-blue.png);
+    background-position: center;
+    background-size: cover;
+}
+.search-bar a:hover div{
+    background: url(../assets/search-green.png);
+    background-position: center;
+    background-size: cover;
+}
+
+/* Section area */
+
+.main{
+    background: #e9ebee;
+}
+
+/* Left section */
+
+.section1{
+    width: 260px;
+    height: 100%;
+    position: fixed;
+    background: white;
+    left: -260px;
+    transition: 0.5s ease;
+}
+.my-sessions{
+    margin-left: 5px;
+}
+.session-type{
+    text-align: start;
+    padding: 5px;
+    background: rgb(245, 245, 245);
+    margin-bottom: 10px;
+    border-radius: 2px;
+}
+#users-sessions{
+    border-left: green solid 5px;
+}
+#mentors-sessions{
+    border-left: orange solid 5px;
+}
+#reviews-sessions{
+    border-left: #0067fc solid 5px;
+}
+.my-sessions a{
+    text-decoration: none;
+    color: #586069
+}
+.my-users-container, .reviews-container{
+    max-height: 200px;
+    overflow-y: scroll;
+}
+.my-users{
+    grid-template-columns: 1fr 3fr;
+    height: 40px;
+    margin-left: 30px;
+    width: 210px;
+    display: none;
+}
+.my-users .profile-photo, .user-profile .profile-photo, .user-review-profile .profile-photo{
+    background: url(../assets/profile-white.png) green;
+    background-position: center;
+    background-size: cover;
+    border: green solid 2px;
+    border-radius: 50%;
+    width: 30px;
+}
+.my-users .names{
+    padding-top: 4px;
+    overflow: hidden;
+}
+.my-sessions:hover #users-sessions{
+    background: green;
+}
+.my-sessions:hover #users-sessions h3{
+    color: white;
+}
+.my-sessions:hover #mentors-sessions{
+    background: orange;
+}
+.my-sessions:hover #mentors-sessions h3{
+    color: white;
+}
+.my-sessions:hover #reviews-sessions{
+    background: #0067fc;
+}
+.my-sessions:hover #reviews-sessions h3{
+    color: white;
+}
+.my-sessions:hover .my-users, .my-sessions:hover .review-rate{
+    display: grid;
+}
+.my-users:hover{
+    background: white;
+}
+.review-rate{
+    display: none;
+    grid-template-columns: 1fr;
+    padding: 5px;
+    margin: 5px;
+    margin-top: 10px;
+    text-align: start;
+    background: white;
+    border-radius: 6px;
+}
+.review-rate a{
+    text-decoration: none;
+    font-size: 20px;
+    color: #586069;
+}
+.user-review-profile{
+    display: grid;
+    grid-template-columns: 1fr 30fr;
+    height: 100%;
+    border-bottom: #66686b2c solid 2px;
+}
+.user-review-profile:hover{
+    background: rgb(237, 250, 255);
+}
+.user-review-profile .profile-photo{
+    width: 45px;
+    height: 45px;
+    /* margin-left: 10px; */
+    /* margin-top: 5px; */
+}
+.user-review-profile .names{
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.star{
+    font-size: 25px;
+}
+.rated{
+    color: orange;
+}
+.posted-review button{
+    font-size: 1em;
+    padding: 10px;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+    color: white;
+    background: orange;
+    width: 100px;
+}
+.posted-review button:hover{
+    cursor: pointer;
+    background: rgb(218, 141, 0);
+}
+.posted-review button:active{
+    transform: scale(0.9);
+}
+
+/* Right section */
+
+.section2{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.section2 h1{
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+}
+.user{
+    display: grid;
+    grid-template-columns: 1fr;
+    height: 200px;
+    padding: 5px;
+    margin: 5px;
+    margin-top: 10px;
+    text-align: start;
+    background: white;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(27,31,35,.5);
+}
+.user a{
+    text-decoration: none;
+    font-size: 30px;
+    color: #586069;
+}
+.user-profile{
+    display: grid;
+    grid-template-columns: 1fr 30fr;
+    height: 100%;
+    border-bottom: #66686b2c solid 2px;
+}
+.user-profile:hover{
+    background: rgb(237, 250, 255);
+}
+.user-profile .profile-photo{
+    width: 70px;
+    height: 70px;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+.user-profile .names{
+    /* margin-top: 20px; */
+    margin-left: 10px;
+}
+.email{
+    font-size: 16px;
+}
+.make-mentor{
+    height: 50px;
+    padding: 10px;
+}
+.make-mentor button{
+    /* border: red solid 1px; */
+    font-size: 20px;
+    width: 100%;
+    height: 40px;
+    padding:10px;
+    border: none;
+    border-radius: 2em;
+    box-shadow: 0 3px 6px rgba(27,31,35,.4);
+    background: #0067fc;
+    color: white;
+}
+.make-mentor button:hover{
+    outline: none;
+    cursor: pointer;
+    background: #0059d6;
+}
+.make-mentor button:focus{
+    outline: none;
+}
+.make-mentor button:active{
+    background: #3388ff;
+    transform: scale(0.95);
+}
+
+
+
+/* Footer */
+
+footer{
+    color: white;
+    height: 80px;
+    background: #3359df;
+    text-align: center;
+    padding: 40px 0;
+}
+.cross .line2{
+    transform: rotate(45deg)
+}
+.cross .line3{
+    transform: rotate(-45deg)
+}
+.cross .line1, .cross .line4{
+    opacity: 0;
+}
+.slide{
+    left: 0px;
+}
+
+
+
+
+
+@media only screen and (min-width: 768px){
+
+    /* Header */
+
+    header{
+        height: 110px;
+    }
+    .container{
+        position: unset;
+        width: 100%;
+        height: 110px;
+        background: white;
+        border-bottom: #3359df solid 5px;
+    }
+    .logo-and-menu{
+        width: 174.5px;
+        margin-right: 20px;
+    }
+    .logo{
+        float: left;
+        width: 100%;
+        height: 100%;
+        background: url(../assets/logo.png);
+        background-position: center;
+        background-size: cover;
+    }
+    .menu{
+        display: none !important;
+    }
+    .navigation{
+        display: grid;
+        grid-template-columns: 5fr 1fr;
+    }
+    #mobile-profile,#mobile-search{
+        display: none;
+    }
+    #desktop-profile{
+        float: right;
+    }
+    .search-bar{
+        margin-top: 38px;
+        height: 49px;
+        grid-template-columns: 15fr 1fr;
+    }
+    .search-bar input{
+        height: 45px;
+        width: unset;
+        margin-left: 50px;
+    }
+    .search-bar a{
+        width: 50px;
+        height: 50px;
+    }
+
+    .main{
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+        grid-gap: 20px;
+    }
+    .section1{
+        display: unset;
+        position: unset;
+        background: #e9ebee;
+    }
+    .user{
+        height: 220px;
+        margin: 20px;
+        padding: 10px;
+    }
+    .user-profile .profile-photo{
+        height: 120px;
+        width: 120px;
+        margin-top: 20px;
+    }
+    .user-profile .names{
+        margin-top: 40px;
+    }
+}
