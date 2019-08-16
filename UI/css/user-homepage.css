@@ -1,0 +1,413 @@
+/* Mobile first CSS model */
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+h1,h3{
+    color: #0d0d0d;
+}
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.2em;
+    color: #586069;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* Header */
+
+header{
+    width: 100%;
+    font-size: 18px;
+    height: 80px;
+}
+.container{
+    position: fixed;
+    width: 100%;
+    height: 80px;
+    background: white;
+    border-bottom: #3359df solid 5px;
+}
+
+.logo-and-menu{
+    width: 100%;
+    height: 100%;
+    padding: 7.5px;
+    float: left;
+}
+.logo{
+    float: left;
+    width: 100px;
+    height: 100%;
+    background: url(../assets/logo.png);
+    background-position: center;
+    background-size: cover;
+}
+.menu{
+    float: right;
+    margin-top: 20px;
+}
+.menu:hover{
+    cursor: pointer;
+}
+.menu div{
+    background: #0067fc;
+    width: 30px;
+    height: 4px;
+    margin: 5px;
+    border-radius: 2em;
+    transition: 0.3s ease;
+}
+.line3{
+    margin-top: -9px !important;
+}
+.navigation{
+    display: none;
+}
+.my-profile, .my-mentors{
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    text-align: start;
+    color: #586069;
+    width: 240px;
+    padding: 5px;
+    margin: 5px;
+    box-shadow: 0 2px 4px rgba(27,31,35,.15);
+    border-radius: 3px;
+}
+.my-profile .profile-photo{
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    background: url(../assets/profile-white.png) #0067fc;
+    background-position: center;
+    background-size: cover;
+    border: #0067fc solid 2px;
+    border-radius: 50%;
+    margin: 10px;
+}
+.my-profile .names{
+    padding-top: 25px;
+    overflow: hidden;
+}
+.my-profile .expand div{
+    width: 20px;
+    height: 20px;
+    margin-top: 27px;
+    background: url(../assets/expand.png);
+    background-position: center;
+    background-size: cover;
+}
+.sub-menu{
+    display: none;
+}
+.my-profile:hover{
+    cursor: pointer;
+}
+.my-profile:hover .sub-menu{
+    display: block;
+    position: absolute;
+    margin-top: 70px;
+    width: 200px;
+    background: white;
+    border: #586069 solid 1px;
+    box-shadow: 0 5px 7px rgba(27,31,35,.15);
+
+}
+.my-profile:hover .sub-menu ul{
+    list-style: none;
+}
+.my-profile:hover .sub-menu a{
+    display: block;
+    text-decoration: none;
+    width: 100%;
+    padding: 10px;
+    color: #586069;
+}
+.sub-menu a:hover{
+    background: #0067fc;
+    color: white !important;
+}
+.sub-menu a:active{
+    background: #3359df;
+}
+.search-bar{
+    height: 44px;
+    padding: 3px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.search-bar input{
+    outline: none;
+    height: 35px;
+    width: 200px;
+    font-size: 1rem;
+    border-radius: 2rem;
+    border: #9c9c9ccb solid 2px;
+    padding-left: 10px;
+    margin-top: 2px;
+}
+.search-bar input:hover{
+    border: none;
+    box-shadow: 0 2px 4px rgba(27, 31, 35, 0.404);
+}
+.search-bar a{
+    display: block;
+    width: 40px;
+    height: 40px;
+    padding: 5px;
+}
+.search-bar a div{
+    width: 100%;
+    height: 100%;
+    background: url(../assets/search-blue.png);
+    background-position: center;
+    background-size: cover;
+}
+.search-bar a:hover div{
+    background: url(../assets/search-green.png);
+    background-position: center;
+    background-size: cover;
+}
+
+/* Section area */
+
+.main{
+    background: #e9ebee;
+}
+
+/* Left section */
+
+.section1{
+    width: 260px;
+    height: 100%;
+    position: fixed;
+    background: white;
+    left: -260px;
+    transition: 0.5s ease;
+}
+.my-sessions{
+    margin-left: 5px;
+}
+.session-type{
+    text-align: start;
+    padding: 5px;
+    background: rgb(245, 245, 245);
+    margin-bottom: 10px;
+    border-radius: 2px;
+}
+#current-sessions{
+    border-left: green solid 5px;
+}
+#requested-sessions{
+    border-left: orange solid 5px;
+}
+.my-sessions a{
+    text-decoration: none;
+    color: #586069
+}
+.my-mentors-container{
+    max-height: 200px;
+    overflow-y: scroll;
+}
+.my-mentors{
+    grid-template-columns: 1fr 3fr;
+    height: 40px;
+    margin-left: 30px;
+    width: 210px;
+    display: none;
+}
+.my-mentors .profile-photo{
+    background: url(../assets/profile-white.png) green;
+    background-position: center;
+    background-size: cover;
+    border: green solid 2px;
+    border-radius: 50%;
+    width: 30px;
+}
+.my-mentors .names{
+    padding-top: 4px;
+    overflow: hidden;
+}
+.my-sessions:hover #current-sessions{
+    background: green;
+}
+.my-sessions:hover #current-sessions h3{
+    color: white;
+}
+.my-sessions:hover #requested-sessions{
+    background: orange;
+}
+.my-sessions:hover #requested-sessions h3{
+    color: white;
+}
+.my-sessions:hover .my-mentors{
+    display: grid;
+}
+.my-mentors:hover{
+    background: white;
+}
+
+/* Right-section */
+
+#available-mentors{
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+}
+.mentors-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+    grid-gap: 20px;
+    padding: 10px;
+    text-align: start;
+}
+.mentors-container .mentors a{
+    text-decoration: none;
+    color: #586069;
+    background: white;
+    display: block;
+    padding: 15px;
+    height: 100%;
+    box-shadow: 0 4px 8px rgba(27,31,35,.5);
+    border-radius: 3px;
+}
+.mentors-container .mentors a:hover{
+    background: rgb(166, 230, 255);
+}
+.mentors .photo1{
+    min-height: 250px;
+    background: url(../assets/kagame.jpg);
+    background-position: center;
+    background-size: cover;
+    border-radius: 3px;
+}
+.mentors .photo2{
+    min-height: 250px;
+    background: url(../assets/zuckerberg.jpg);
+    background-position: center;
+    background-size: cover;
+    border-radius: 3px;
+}
+.mentors .photo3{
+    min-height: 250px;
+    background: url(../assets/chrisbrown.jpg);
+    background-position: center;
+    background-size: cover;
+    border-radius: 3px;
+}
+.mentors p{
+    font-size: 16px;
+}
+.star{
+    font-size: 30px;
+}
+.rated{
+    color: orange;
+}
+.mentors .view{
+    border-top: 1px solid #e1e4e8;
+    color: #0067fc;
+    margin-top: 15px;
+    padding-top: 15px;
+}
+.mentors .view p{
+    font-size: 16px;
+}
+
+/* Footer */
+
+footer{
+    color: white;
+    height: 80px;
+    background: #3359df;
+    text-align: center;
+    padding: 40px 0;
+}
+.cross .line2{
+    transform: rotate(45deg)
+}
+.cross .line3{
+    transform: rotate(-45deg)
+}
+.cross .line1, .cross .line4{
+    opacity: 0;
+}
+.slide{
+    left: 0px;
+}
+
+
+
+
+
+@media only screen and (min-width: 768px){
+
+    /* Header */
+
+    header{
+        height: 110px;
+    }
+    .container{
+        position: unset;
+        width: 100%;
+        height: 110px;
+        background: white;
+        border-bottom: #3359df solid 5px;
+    }
+    .logo-and-menu{
+        width: 174.5px;
+        margin-right: 20px;
+    }
+    .logo{
+        float: left;
+        width: 100%;
+        height: 100%;
+        background: url(../assets/logo.png);
+        background-position: center;
+        background-size: cover;
+    }
+    .menu{
+        display: none !important;
+    }
+    .navigation{
+        display: grid;
+        grid-template-columns: 5fr 1fr;
+    }
+    #mobile-profile,#mobile-search{
+        display: none;
+    }
+    #desktop-profile{
+        float: right;
+    }
+    .search-bar{
+        margin-top: 38px;
+        height: 49px;
+        grid-template-columns: 15fr 1fr;
+    }
+    .search-bar input{
+        height: 45px;
+        width: unset;
+        margin-left: 50px;
+    }
+    .search-bar a{
+        width: 50px;
+        height: 50px;
+    }
+
+    /* Section area */
+
+    .main{
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+        grid-gap: 20px;
+    }
+    .section1{
+        display: unset;
+        position: unset;
+        background: #e9ebee;
+    }
+    .mentors-container{
+        padding: 20px;
+    }
+}    
