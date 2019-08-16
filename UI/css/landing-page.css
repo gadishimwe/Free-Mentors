@@ -1,0 +1,321 @@
+/* Mobile first CSS model */
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.2em;
+    color: #586069;
+    background: white;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* Header */
+
+header{
+    width: 100%;
+    font-size: 18px;
+    height: 80px;
+}
+.container{
+    position: fixed;
+    width: 100%;
+    height: 80px;
+    background: white;
+    border-bottom: #3359df solid 5px;
+}
+.logo-and-menu{
+    width: 100%;
+    height: 100%;
+    padding: 7.5px;
+    float: left;
+}
+.logo{
+    float: left;
+    width: 100px;
+    height: 100%;
+    background: url(../assets/logo.png);
+    background-position: center;
+    background-size: cover;
+}
+.menu{
+    float: right;
+    margin-top: 20px;
+}
+.menu:hover{
+    cursor: pointer;
+}
+.menu div{
+    background: #0067fc;
+    width: 30px;
+    height: 4px;
+    margin: 5px;
+    border-radius: 2em;
+    transition: 0.3s ease;
+}
+.line3{
+    margin-top: -9px !important;
+}
+.navigation{
+    text-align: left;
+    background: #1353b4;
+    height: 100%;
+
+    margin: 0px;
+    float: none;
+    max-width: 300px;
+    position: fixed;
+    top: 80px;
+    bottom: 0;
+    left: -300px;
+    transition: 0.5s ease;
+
+}
+.navigation ul{
+    list-style: none;
+    width: 100%;
+    height: 100%;
+}
+.navigation li{
+    width: 100%;
+    height: 40px;
+}
+.navigation li a{
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    width: 100%;
+    padding: 5px 100px 0 15px;
+}
+.navigation a:hover{
+    color: rgb(0, 230, 0);
+    background: #0d418f;
+}
+.navigation a:active{
+    color: rgb(37, 158, 37);
+}
+
+/* Section Area */
+
+.section1{
+    color: white;
+    min-height: 280px;
+    background: url(../assets/landing.jpeg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    box-shadow: 0 .8rem .3rem rgba(0, 0, 0, .3);
+    margin-bottom: 40px;
+}
+.sect1{
+    background: rgba(0, 0, 0, 0.6);
+    height: 100%;
+    padding: 0.7em;
+    box-shadow: 0 .8rem .3rem rgba(0, 0, 0, .3);
+}
+.sect1 h1{
+    font-size: 30px
+}
+.sect1 p{
+    margin: 40px;
+}
+.sect1 a{
+    float: left;
+    text-align: center;
+    padding: 10px 20px;
+    margin: 20px;
+    margin-top: -10px;
+    font-size: 20px;
+    text-decoration: none;
+    color: white;
+    background: green;
+    border-radius:2em;
+    box-shadow: 0 .8rem .3rem rgba(0, 0, 0, .3);
+}
+.section1 a:hover{
+    background: rgb(9, 170, 9);
+}
+.section1 a:active{
+    font-size: 19px;
+}
+
+/* Section 2 */
+
+.section2 h2,.section3 h2{
+    color: #0d0d0d;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+.section2 .responsive{
+    width: 100%;
+    height: 250px;
+    background: url(../assets/responsiveness.png);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.responsive p{
+    text-align: start;
+    width: 100px;
+    font-size: 10px;
+    float: right;
+    margin-right: 10px;
+    color: #24292e;
+    padding-bottom: 20px;
+}
+
+/* Section 3 */
+
+.section3{
+    margin-top: 30px;
+}
+.benefits{
+    background: url(../assets/mentoring.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: left;
+    width: 100%;
+    height: 800px;
+    margin-bottom: 100px;
+}
+.benefits p{
+    border: #0067fc solid 2px;
+    border-radius: 8px;
+    width: 200px;
+    margin: 20px;
+    padding: 10px;
+    background: rgb(166, 230, 255);
+    box-shadow: 0 5px 7px rgba(27,31,35,.4);
+    float: right;
+}
+footer{
+    color: white;
+    height: 80px;
+    background: #3359df;
+    text-align: center;
+    padding: 40px 0;
+}
+.cross .line2{
+    transform: rotate(45deg)
+}
+.cross .line3{
+    transform: rotate(-45deg)
+}
+.cross .line1, .cross .line4{
+    opacity: 0;
+}
+.slide{
+    left: 0px;
+}
+
+
+
+
+
+
+
+@media only screen and (min-width: 700px){
+    header{
+        height: 110px;
+    }
+    .container{
+        position: unset;
+        width: 100%;
+        height: 110px;
+        background: white;
+        border-bottom: #3359df solid 5px;
+    }
+    .logo-and-menu{
+        width: 174.5px;
+        margin-right: 20px;
+    }
+    .logo{
+        float: left;
+        width: 100%;
+        height: 100%;
+        background: url(../assets/logo.png);
+        background-position: center;
+        background-size: cover;
+    }
+    .menu{
+        display: none !important;
+    }
+    .navigation{
+        padding: 0;
+        float: right;
+        position: static;
+        background: unset;
+        max-width: unset;
+        top: unset;
+    }
+    .navigation ul{
+        padding-top: 30px;
+        list-style-type: none;
+        width: unset;
+        height: unset;
+        overflow: unset;
+    }
+    .navigation li{
+        width: unset;
+        float: left;
+        margin-right: 40px;
+        padding-top: 20px;.
+
+    }
+    .navigation li a{
+        text-decoration: none;
+        color: #3359df;
+        padding: 5px 10px;
+    }
+    .navigation a:hover{
+        border-radius: 2em;
+        box-shadow: 0 .5rem .3rem rgba(0, 0, 0, .3);
+        background: unset;
+    }
+    .navigation a:active{
+        font-size: 17px;
+        margin-left: 2.78px;
+    }
+    .navigation .up{
+        background: rgb(83, 202, 25);
+        border-radius: 6px;
+        color: white;
+        box-shadow: -.3rem .5rem .2rem rgba(0, 0, 0, .2);
+    }
+    .navigation .up:hover{
+        background: white;
+        color: #3359df;
+        border-top: #1353b4 solid 2px;
+    }
+    .navigation .up:active{
+        color: rgb(20, 197, 20);
+        margin-left: 3.73px;
+    }
+    .section1{
+        min-height: 500px;
+    }
+    .sect1 h1{
+        font-size: 50px;
+        margin-top: 30px;
+    }
+    .sect1 a{
+        padding: 20px 40px;
+        margin: 20px;
+        margin-top: -30px;
+        font-size: 20px;
+    }
+    .section2 .responsive{
+        height: 500px;
+    }
+    .responsive p{
+        font-size: unset;
+        width: 220px;
+        float: right;
+        margin-right: 20px;
+    }
+}
