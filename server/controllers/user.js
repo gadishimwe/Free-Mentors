@@ -77,3 +77,50 @@ exports.usersSignUp = (req, res) => {
     });
   });
 };
+
+exports.usersSignIn = (req, res) => {
+  const user = users.find((c) => c.email === req.body.email);
+  if (!user) {
+    return res.status(401).json({
+      status: 401,
+      error: 'Invalid email or password',
+    });
+  }
+  const schema = {
+    email: Joi.string().email().required(),
+    password: Joi.string().regex(/^[a-zA-Z0-9]{7,30}$/),
+  };
+  const result = Joi.validate(req.body, schema);
+  if (result.error) {
+    return res.status(400).json({
+      status: 400,
+      error: `${result.error.details[0].message}`,
+    });
+  }
+  bcrypt.compare(req.body.password, user.password, (err, results) => {
+    if (results) {
+      const token = jwt.sign(
+        {
+          email: user.email,
+          user_id: user.id,
+          isAdmin: user.isAdmin,
+        },
+        process.env.JWT_KEY,
+        {
+          expiresIn: '7d',
+        },
+      );
+      return res.status(200).json({
+        status: 200,
+        message: 'User is successfully logged in',
+        data: {
+          token,
+        },
+      });
+    }
+    res.status(401).json({
+      status: 401,
+      error: 'Invalid email or password',
+    });
+  });
+};
