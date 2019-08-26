@@ -10,6 +10,7 @@ const users = [
     occupation: 'Developer',
     expertise: 'javascript',
     isAdmin: true,
+    isMentor: false,
   },
   {
     userId: 2,
@@ -22,6 +23,7 @@ const users = [
     occupation: 'Developer',
     expertise: 'javascript',
     isAdmin: false,
+    isMentor: false,
   },
 ];
 export default users;

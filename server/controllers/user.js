@@ -1,9 +1,10 @@
+/* eslint-disable radix */
 import express from 'express';
-import Joi from 'joi';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import users from '../models/users';
+import mentors from '../models/mentor';
 
 dotenv.config();
 
@@ -11,32 +12,6 @@ const app = express();
 app.use(express.json);
 
 exports.usersSignUp = (req, res) => {
-  const user = users.find((c) => c.email === req.body.email);
-  if (user) {
-    return res.status(401).json({
-      status: 401,
-      error: 'Email already exists',
-    });
-  }
-  const schema = {
-    firstName: Joi.string().min(3).required(),
-    lastName: Joi.string().min(3).required(),
-    email: Joi.string().email().required(),
-    password: Joi.string().regex(/^[a-zA-Z0-9]{8,30}$/),
-    address: Joi.string().min(5).required(),
-    bio: Joi.string().min(20).required(),
-    occupation: Joi.string().min(5).required(),
-    expertise: Joi.string().min(5).required(),
-
-  };
-
-  const result = Joi.validate(req.body, schema);
-  if (result.error) {
-    return res.status(400).json({
-      status: 400,
-      error: `${result.error.details[0].message}`,
-    });
-  }
   bcrypt.hash(req.body.password, 10, (err, hash) => {
     if (err) {
       return res.status(500).json({
@@ -46,8 +21,8 @@ exports.usersSignUp = (req, res) => {
 
     const newUser = {
       userId: users.length + 1,
-      firstName: req.body.first_name,
-      lastName: req.body.last_name,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
       email: req.body.email,
       password: hash,
       address: req.body.address,
@@ -55,6 +30,7 @@ exports.usersSignUp = (req, res) => {
       occupation: req.body.occupation,
       expertise: req.body.expertise,
       isAdmin: false,
+      isMentor: false,
     };
     const token = jwt.sign(
       {
@@ -79,24 +55,7 @@ exports.usersSignUp = (req, res) => {
 };
 
 exports.usersSignIn = (req, res) => {
-  const user = users.find((c) => c.email === req.body.email);
-  if (!user) {
-    return res.status(401).json({
-      status: 401,
-      error: 'Invalid email or password',
-    });
-  }
-  const schema = {
-    email: Joi.string().email().required(),
-    password: Joi.string().regex(/^[a-zA-Z0-9]{7,30}$/),
-  };
-  const result = Joi.validate(req.body, schema);
-  if (result.error) {
-    return res.status(400).json({
-      status: 400,
-      error: `${result.error.details[0].message}`,
-    });
-  }
+  const user = users.find((o) => o.email === req.body.email);
   bcrypt.compare(req.body.password, user.password, (err, results) => {
     if (results) {
       const token = jwt.sign(
@@ -122,5 +81,41 @@ exports.usersSignIn = (req, res) => {
       status: 401,
       error: 'Invalid email or password',
     });
+  });
+};
+exports.userChangeToMentor = (req, res) => {
+  const user = users.find((o) => o.userId === parseInt(req.params.userId));
+  if (!user) {
+    return res.status(401).json({
+      status: 401,
+      error: 'This user does not exist.',
+    });
+  }
+  if (user.isMentor === true) {
+    return res.status(401).json({
+      status: 401,
+      error: 'This user is already a mentor',
+    });
+  }
+  const objIndex = users.findIndex((obj) => obj.userId === parseInt(req.params.userId));
+  users[objIndex].isMentor = true;
+
+  const newMentor = {
+    mentorId: mentors.length + 1,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    email: user.email,
+    password: user.password,
+    address: user.address,
+    bio: user.bio,
+    occupation: user.occupation,
+    expertise: user.expertise,
+    isAdmin: false,
+    isMentor: user.isMentor,
+  };
+  mentors.push(newMentor);
+  res.status(200).json({
+    status: 200,
+    message: 'User account changed to mentor',
   });
 };
