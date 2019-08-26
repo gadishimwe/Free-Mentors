@@ -9,5 +9,6 @@ const router = express.Router();
 router.post('/auth/signup', signUpValidator, UsersController.usersSignUp);
 router.post('/auth/signIn', signinValidator, UsersController.usersSignIn);
 router.patch('/user/:userId', [checkAuth, checkAdmin], UsersController.userChangeToMentor);
+router.get('/mentors', checkAuth, UsersController.allMentors);
 
 module.exports = router;
