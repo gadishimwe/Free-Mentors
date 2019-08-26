@@ -116,6 +116,14 @@ exports.userChangeToMentor = (req, res) => {
   mentors.push(newMentor);
   res.status(200).json({
     status: 200,
-    message: 'User account changed to mentor',
+    data: {
+      message: 'User account changed to mentor',
+    },
+  });
+};
+exports.allMentors = (req, res) => {
+  res.status(200).json({
+    status: 200,
+    data: mentors,
   });
 };
