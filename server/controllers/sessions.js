@@ -38,3 +38,23 @@ exports.sessionAccept = (req, res) => {
     data: session,
   });
 };
+exports.sessionDecline = (req, res) => {
+  const session = sessions.find((o) => o.sessionId === parseInt(req.params.sessionId));
+  if (!session) {
+    return res.status(401).json({
+      status: 401,
+      error: 'This session does not exist.',
+    });
+  }
+  if (session.status === 'rejected') {
+    return res.status(401).json({
+      status: 401,
+      error: 'This session is already rejected',
+    });
+  }
+  session.status = 'rejected';
+  res.status(200).json({
+    status: 200,
+    data: session,
+  });
+};
