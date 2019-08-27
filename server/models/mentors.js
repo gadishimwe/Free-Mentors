@@ -12,5 +12,18 @@ const mentors = [
     isAdmin: false,
     isMentor: true,
   },
+  {
+    mentorId: 2,
+    firstName: 'john',
+    lastName: 'wick',
+    email: 'john@gmail.com',
+    password: '$2b$10$ubrdvsVEMSwhsJGpm71VJON8ibShEdNxCu7BcHST7dh3dJbgPuBQW',
+    address: 'nyarugenge',
+    bio: 'uhfuif fihwiufhw fuwhfu ufhwufhu',
+    occupation: 'developer',
+    expertise: 'javascript',
+    isAdmin: false,
+    isMentor: true,
+  },
 ];
 export default mentors;
