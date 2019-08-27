@@ -61,9 +61,10 @@ exports.usersSignIn = (req, res) => {
     if (results) {
       const token = jwt.sign(
         {
-          email: user.email,
           user_id: user.id,
+          email: user.email,
           isAdmin: user.isAdmin,
+          isMentor: user.isMentor,
         },
         process.env.JWT_KEY,
         {

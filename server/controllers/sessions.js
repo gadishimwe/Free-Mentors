@@ -18,3 +18,23 @@ exports.sessionRequest = (req, res) => {
     data: newSession,
   });
 };
+exports.sessionAccept = (req, res) => {
+  const session = sessions.find((o) => o.sessionId === parseInt(req.params.sessionId));
+  if (!session) {
+    return res.status(401).json({
+      status: 401,
+      error: 'This session does not exist.',
+    });
+  }
+  if (session.status === 'accepted') {
+    return res.status(401).json({
+      status: 401,
+      error: 'This session is already accepted',
+    });
+  }
+  session.status = 'accepted';
+  res.status(200).json({
+    status: 200,
+    data: session,
+  });
+};
