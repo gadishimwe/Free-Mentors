@@ -5,7 +5,7 @@ import mentors from '../models/mentors';
 import reviews from '../models/reviews';
 
 exports.sessionRequest = (req, res) => {
-  const user = users.find((o) => o.email === req.userData.email);
+  const user = users.find((usr) => usr.email === req.userData.email);
   const newSession = {
     sessionId: sessions.length + 1,
     mentorId: parseInt(req.body.mentorId),
@@ -21,7 +21,7 @@ exports.sessionRequest = (req, res) => {
   });
 };
 exports.sessionAccept = (req, res) => {
-  const session = sessions.find((o) => o.sessionId === parseInt(req.params.sessionId));
+  const session = sessions.find((sssn) => sssn.sessionId === parseInt(req.params.sessionId));
   if (!session) {
     return res.status(401).json({
       status: 401,
@@ -41,7 +41,7 @@ exports.sessionAccept = (req, res) => {
   });
 };
 exports.sessionDecline = (req, res) => {
-  const session = sessions.find((o) => o.sessionId === parseInt(req.params.sessionId));
+  const session = sessions.find((sssn) => sssn.sessionId === parseInt(req.params.sessionId));
   if (!session) {
     return res.status(401).json({
       status: 401,
@@ -88,5 +88,22 @@ exports.reviewMentor = (req, res) => {
   res.status(200).json({
     status: 200,
     data: newReview,
+  });
+};
+exports.deleteReview = (req, res) => {
+  const review = reviews.find((rvw) => rvw.sessionId === parseInt(req.params.sessionId));
+  if (!review) {
+    return res.status(401).json({
+      status: 401,
+      error: 'This review does not exist',
+    });
+  }
+  const reviewIndex = reviews.findIndex((rvw) => rvw.sessionId === review.sessionId);
+  reviews.splice(reviewIndex, 1);
+  res.status(200).json({
+    status: 200,
+    data: {
+      message: 'Review successfully deleted',
+    },
   });
 };
