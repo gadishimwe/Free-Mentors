@@ -6,13 +6,13 @@ import mentors from '../models/mentors';
 export default (req, res, next) => {
   const session = sessions.find((sssn) => parseInt(req.params.sessionId) === sssn.sessionId);
   const user = users.find((usr) => usr.userId === parseInt(req.userData.userId));
-  const mentor = mentors.find((mntr) => mntr.mentorId === session.mentorId);
   if (!session) {
     return res.status(401).json({
       status: 401,
       error: 'This session does not exist.',
     });
   }
+  const mentor = mentors.find((mntr) => mntr.mentorId === session.mentorId);
   if (session.menteeId !== user.userId || session.status !== 'accepted') {
     return res.status(401).json({
       status: 401,
