@@ -31,7 +31,6 @@ exports.usersSignUp = (req, res) => {
       isAdmin: false,
       isMentor: false,
     };
-    console.log(newUser);
 
     const token = jwt.sign(
       {
