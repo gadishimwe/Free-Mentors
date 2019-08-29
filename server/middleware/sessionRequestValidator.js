@@ -1,10 +1,18 @@
 /* eslint-disable radix */
 import users from '../models/users';
 import sessions from '../models/sessions';
+import mentors from '../models/mentors';
 
 export default (req, res, next) => {
-  const user = users.find((o) => o.email === req.userData.email);
+  const user = users.find((usr) => usr.email === req.userData.email);
+  const mentor = mentors.find((mntr) => mntr.mentorId === parseInt(req.body.mentorId));
   const isSessionExist = sessions.find((o) => o.mentorId === parseInt(req.body.mentorId) && o.menteeId === user.userId);
+  if (!mentor) {
+    return res.status(401).json({
+      status: 401,
+      error: 'Mentor you entered does not exist.',
+    });
+  }
   if (isSessionExist) {
     return res.status(401).json({
       status: 401,
