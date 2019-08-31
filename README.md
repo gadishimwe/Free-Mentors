@@ -15,3 +15,6 @@ __N.B:__ To be able to access admin panel and mentor homepage pages, you have to
 * For a mentor:
     * Email: *mentor@freementors.com*
     * Password: mentor@123
+
+## Author:
+####[Gad Ishimwe](https://www.github.com/gadishimwe)
