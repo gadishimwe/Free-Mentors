@@ -25,17 +25,17 @@ export default (req, res, next) => {
       error: 'score is required,please provide it.',
     });
   }
-  if (!req.body.remark) {
-    return res.status(401).json({
-      status: 401,
-      error: 'remark is required,please provide it.',
-    });
-  }
   // eslint-disable-next-line no-restricted-globals
   if (parseInt(req.body.score) < 1 || parseInt(req.body.score) > 5 || isNaN(req.body.score)) {
     return res.status(401).json({
       status: 401,
       error: 'score must 1 to 5, please enter valid score',
+    });
+  }
+  if (!req.body.remark) {
+    return res.status(401).json({
+      status: 401,
+      error: 'remark is required,please provide it.',
     });
   }
   next();
