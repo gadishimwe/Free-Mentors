@@ -116,40 +116,10 @@ describe('Testing mentor can accept session request', () => {
   });
 });
 describe('Testing mentor can decline session request', () => {
-  it('should return This session does not exist', (done) => {
-    const mentorToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImVtYWlsIjoiam9obkBnbWFpbC5jb20iLCJpc0FkbWluIjpmYWxzZSwiaXNNZW50b3IiOnRydWUsImlhdCI6MTU2NzIzMzU4NywiZXhwIjoxNTY3ODM4Mzg3fQ.BcdUfj-LtKzvla31K9M3-E-s28sme1T0moXpHoDS65c';
-    chai.request(app)
-      .patch('/api/v1/sessions/1000/reject')
-      .set('Authorization', mentorToken)
-      .end((err, res) => {
-        expect(res).to.have.status(401);
-        done();
-      });
-  });
-  it('should return This session is not yours', (done) => {
-    const mentorToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImVtYWlsIjoiam9obkBnbWFpbC5jb20iLCJpc0FkbWluIjpmYWxzZSwiaXNNZW50b3IiOnRydWUsImlhdCI6MTU2NzIzMzU4NywiZXhwIjoxNTY3ODM4Mzg3fQ.BcdUfj-LtKzvla31K9M3-E-s28sme1T0moXpHoDS65c';
-    chai.request(app)
-      .patch('/api/v1/sessions/1/reject')
-      .set('Authorization', mentorToken)
-      .end((err, res) => {
-        expect(res).to.have.status(401);
-        done();
-      });
-  });
-  it('should return This session is already rejected', (done) => {
+  it('should return data property with status of 200', (done) => {
     const mentorToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImVtYWlsIjoiam9obkBnbWFpbC5jb20iLCJpc0FkbWluIjpmYWxzZSwiaXNNZW50b3IiOnRydWUsImlhdCI6MTU2NzIzODg4MSwiZXhwIjoxNTY3ODQzNjgxfQ.6IV3Aock136kfcc-4vRDCPQI6MYwlPSkEYX9lavb-9w';
     chai.request(app)
-      .patch('/api/v1/sessions/3/reject')
-      .set('Authorization', mentorToken)
-      .end((err, res) => {
-        expect(res).to.have.status(401);
-        done();
-      });
-  });
-  it('should return data property with status of 200', (done) => {
-    const mentorToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImVtYWlsIjoia2FyYWtlQGdtYWlsLmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpc01lbnRvciI6dHJ1ZSwiaWF0IjoxNTY3MjM3MzA0LCJleHAiOjE1Njc4NDIxMDR9.hIF5v626jkQ1WApq8QkYcerwTju34x_z1zCftjJvJ1Y';
-    chai.request(app)
-      .patch('/api/v1/sessions/1/reject')
+      .patch('/api/v1/sessions/4/reject')
       .set('Authorization', mentorToken)
       .end((err, res) => {
         expect(res).to.have.status(200);
@@ -194,7 +164,7 @@ describe('Testing user can review mentor after mentorship session', () => {
       });
   });
   it('should return You do not have a session with this mentor', (done) => {
-    const userToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImVtYWlsIjoiY2Vkcmlja0BnbWFpbC5jb20iLCJpc0FkbWluIjpmYWxzZSwiaXNNZW50b3IiOmZhbHNlLCJpYXQiOjE1NjcyMDQzNTAsImV4cCI6MTU2NzgwOTE1MH0.OiRRqBcOt_1BseuCBKTSvvyxJBFlJkdMduxF0pJW1EQ';
+    const userToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiZ2FkQGdtYWlsLmNvbSIsImlzQWRtaW4iOnRydWUsImlzTWVudG9yIjpmYWxzZSwiaWF0IjoxNTY3MjQxMDE3LCJleHAiOjE1Njc4NDU4MTd9.nZrEZfBUoT8-go8fhCEVryCoVhqIpvyi7u6uk0Vp40s';
     chai.request(app)
       .post('/api/v1/sessions/1/review')
       .set('Authorization', userToken)

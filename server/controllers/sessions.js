@@ -21,59 +21,19 @@ exports.sessionRequest = (req, res) => {
   });
 };
 exports.sessionAccept = (req, res) => {
-  const session = sessions.find((sssn) => sssn.sessionId === parseInt(req.params.sessionId));
-  if (!session) {
-    return res.status(401).json({
-      status: 401,
-      error: 'This session does not exist.',
-    });
-  }
-  const mentor = mentors.find((mntr) => mntr.mentorId === session.mentorId);
-  const mentorUser = users.find((usr) => usr.email === mentor.email);
-  if (mentorUser.userId !== req.userData.userId) {
-    return res.status(401).json({
-      status: 401,
-      error: 'This session is not yours.',
-    });
-  }
-  if (session.status === 'accepted') {
-    return res.status(401).json({
-      status: 401,
-      error: 'This session is already accepted',
-    });
-  }
-  session.status = 'accepted';
+  const sessionAcc = sessions.find((sssnA) => sssnA.sessionId === parseInt(req.params.sessionId));
+  sessionAcc.status = 'accepted';
   res.status(200).json({
     status: 200,
-    data: session,
+    data: sessionAcc,
   });
 };
 exports.sessionDecline = (req, res) => {
-  const session = sessions.find((sssn) => sssn.sessionId === parseInt(req.params.sessionId));
-  if (!session) {
-    return res.status(401).json({
-      status: 401,
-      error: 'This session does not exist.',
-    });
-  }
-  const mentor = mentors.find((mntr) => mntr.mentorId === session.mentorId);
-  const mentorUser = users.find((usr) => usr.email === mentor.email);
-  if (mentorUser.userId !== req.userData.userId) {
-    return res.status(401).json({
-      status: 401,
-      error: 'This session is not yours.',
-    });
-  }
-  if (session.status === 'rejected') {
-    return res.status(401).json({
-      status: 401,
-      error: 'This session is already rejected',
-    });
-  }
-  session.status = 'rejected';
+  const sessionRej = sessions.find((sssnR) => sssnR.sessionId === parseInt(req.params.sessionId));
+  sessionRej.status = 'rejected';
   res.status(200).json({
     status: 200,
-    data: session,
+    data: sessionRej,
   });
 };
 exports.allSessions = (req, res) => {
