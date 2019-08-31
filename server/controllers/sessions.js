@@ -28,6 +28,14 @@ exports.sessionAccept = (req, res) => {
       error: 'This session does not exist.',
     });
   }
+  const mentor = mentors.find((mntr) => mntr.mentorId === session.mentorId);
+  const mentorUser = users.find((usr) => usr.email === mentor.email);
+  if (mentorUser.userId !== req.userData.userId) {
+    return res.status(401).json({
+      status: 401,
+      error: 'This session is not yours.',
+    });
+  }
   if (session.status === 'accepted') {
     return res.status(401).json({
       status: 401,
@@ -46,6 +54,14 @@ exports.sessionDecline = (req, res) => {
     return res.status(401).json({
       status: 401,
       error: 'This session does not exist.',
+    });
+  }
+  const mentor = mentors.find((mntr) => mntr.mentorId === session.mentorId);
+  const mentorUser = users.find((usr) => usr.email === mentor.email);
+  if (mentorUser.userId !== req.userData.userId) {
+    return res.status(401).json({
+      status: 401,
+      error: 'This session is not yours.',
     });
   }
   if (session.status === 'rejected') {

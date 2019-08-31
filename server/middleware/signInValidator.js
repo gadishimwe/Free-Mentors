@@ -1,3 +1,4 @@
+import bcrypt from 'bcrypt';
 import users from '../models/users';
 
 export default (req, res, next) => {
@@ -8,5 +9,13 @@ export default (req, res, next) => {
       error: 'Invalid email or password',
     });
   }
-  next();
+  bcrypt.compare(req.body.password, user.password, (err, userPassword) => {
+    if (userPassword) {
+      return next();
+    }
+    return res.status(401).json({
+      status: 401,
+      error: 'Invalid email or password',
+    });
+  });
 };

@@ -12,12 +12,6 @@ app.use(express.json);
 
 exports.usersSignUp = (req, res) => {
   bcrypt.hash(req.body.password, 10, (err, hash) => {
-    if (err) {
-      return res.status(500).json({
-        error: err,
-      });
-    }
-
     const newUser = {
       userId: users.length + 1,
       firstName: req.body.firstName,
@@ -31,7 +25,6 @@ exports.usersSignUp = (req, res) => {
       isAdmin: false,
       isMentor: false,
     };
-
     const token = jwt.sign(
       {
         email: newUser.email,
@@ -53,34 +46,25 @@ exports.usersSignUp = (req, res) => {
     });
   });
 };
-
 exports.usersSignIn = (req, res) => {
-  const user = users.find((o) => o.email === req.body.email);
-  bcrypt.compare(req.body.password, user.password, (err, results) => {
-    if (results) {
-      const token = jwt.sign(
-        {
-          userId: user.userId,
-          email: user.email,
-          isAdmin: user.isAdmin,
-          isMentor: user.isMentor,
-        },
-        process.env.JWT_KEY,
-        {
-          expiresIn: '7d',
-        },
-      );
-      return res.status(200).json({
-        status: 200,
-        message: 'User is successfully logged in',
-        data: {
-          token,
-        },
-      });
-    }
-    res.status(401).json({
-      status: 401,
-      error: 'Invalid email or password',
-    });
+  const user = users.find((usr) => usr.email === req.body.email);
+  const token = jwt.sign(
+    {
+      userId: user.userId,
+      email: user.email,
+      isAdmin: user.isAdmin,
+      isMentor: user.isMentor,
+    },
+    process.env.JWT_KEY,
+    {
+      expiresIn: '7d',
+    },
+  );
+  res.status(200).json({
+    status: 200,
+    message: 'User is successfully logged in',
+    data: {
+      token,
+    },
   });
 };

@@ -4,7 +4,7 @@ import users from '../models/users';
 import mentors from '../models/mentors';
 
 exports.userChangeToMentor = (req, res) => {
-  const user = users.find((o) => o.userId === parseInt(req.params.userId));
+  const user = users.find((usr) => usr.userId === parseInt(req.params.userId));
   if (!user) {
     return res.status(401).json({
       status: 401,
@@ -17,8 +17,8 @@ exports.userChangeToMentor = (req, res) => {
       error: 'This user is already a mentor',
     });
   }
-  const objIndex = users.findIndex((obj) => obj.userId === parseInt(req.params.userId));
-  users[objIndex].isMentor = true;
+  const userIndex = users.findIndex((usr) => usr.userId === parseInt(req.params.userId));
+  users[userIndex].isMentor = true;
 
   const newMentor = {
     mentorId: mentors.length + 1,
@@ -48,7 +48,7 @@ exports.allMentors = (req, res) => {
   });
 };
 exports.specificMentor = (req, res) => {
-  const mentor = mentors.find((o) => o.mentorId === parseInt(req.params.mentorId));
+  const mentor = mentors.find((mntr) => mntr.mentorId === parseInt(req.params.mentorId));
   if (!mentor) {
     return res.status(401).json({
       status: 401,
