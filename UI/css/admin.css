@@ -374,6 +374,11 @@ header{
     height: 50px;
     padding: 10px;
 }
+.to-be-shown{
+    display: none;
+    background: rgb(144, 255, 144);
+    padding: 5px;
+}
 .make-mentor button{
     /* border: red solid 1px; */
     font-size: 20px;
@@ -421,6 +426,12 @@ footer{
 }
 .slide{
     left: 0px;
+}
+.show{
+    display: block;
+}
+.hide{
+    display: none;
 }
 
 

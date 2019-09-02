@@ -124,8 +124,6 @@ header{
     margin: 40px;
 }
 .sect1 a{
-    float: left;
-    text-align: center;
     padding: 10px 20px;
     margin: 20px;
     margin-top: -10px;
@@ -296,7 +294,7 @@ footer{
         color: rgb(20, 197, 20);
         margin-left: 3.73px;
     }
-    .section1{
+    .sect1{
         min-height: 500px;
     }
     .sect1 h1{
