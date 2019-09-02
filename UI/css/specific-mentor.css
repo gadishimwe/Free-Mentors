@@ -296,7 +296,6 @@ header{
     height: 275px;;
 }
 .requesting{
-    /* height: 310px; */
     margin: 20px;
 }
 .requesting button{
@@ -328,6 +327,10 @@ header{
     padding: 10px;
     border-radius: 6px;
     margin-bottom: 20px;
+}
+.feedback{
+    background: rgb(144, 255, 144);
+    padding: 20px;
 }
 .requesting button:active .requesting .review{
     display: block;

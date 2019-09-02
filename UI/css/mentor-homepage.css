@@ -312,6 +312,12 @@ header{
     margin-top: 20px;
     margin-left: 10px;
 }
+.to-be-shown{
+    display: none;
+    padding-top: 10px;
+    font: bold;
+    color: black;
+}
 .confirm{
     height: 50px;
 }
@@ -375,6 +381,12 @@ footer{
 }
 .slide{
     left: 0px;
+}
+.show{
+    display: block;
+}
+.hide{
+    display: none;
 }
 
 

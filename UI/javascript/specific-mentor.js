@@ -1,10 +1,10 @@
 const enableReview = () => {
-  const requestButton = document.querySelector('#request-button');
-  const reviewOption = document.querySelector('.review');
+  const hideThis = document.querySelector('.to-be-hidden');
+  const showThis = document.querySelector('.to-be-shown');
 
-  requestButton.addEventListener('click', () => {
-    reviewOption.classList.add('show');
-    requestButton.classList.add('hide');
+  hideThis.addEventListener('click', () => {
+    showThis.classList.add('show');
+    hideThis.classList.add('hide');
   });
 };
 enableReview();
