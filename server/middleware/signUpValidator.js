@@ -4,8 +4,8 @@ import users from '../models/users';
 export default (req, res, next) => {
   const user = users.find((o) => o.email === req.body.email);
   if (user) {
-    return res.status(401).json({
-      status: 401,
+    return res.status(422).json({
+      status: 422,
       error: 'Email already exists',
     });
   }
@@ -13,7 +13,7 @@ export default (req, res, next) => {
     firstName: Joi.string().min(3).required(),
     lastName: Joi.string().min(3).required(),
     email: Joi.string().email().required(),
-    password: Joi.string().regex(/^[a-zA-Z0-9]{6,30}$/),
+    password: Joi.string().regex(/^[a-zA-Z0-9]{8,30}$/).required(),
     address: Joi.string().min(5).required(),
     bio: Joi.string().min(20).required(),
     occupation: Joi.string().min(5).required(),

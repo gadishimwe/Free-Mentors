@@ -6,14 +6,14 @@ import mentors from '../models/mentors';
 exports.userChangeToMentor = (req, res) => {
   const user = users.find((usr) => usr.userId === parseInt(req.params.userId));
   if (!user) {
-    return res.status(401).json({
-      status: 401,
+    return res.status(404).json({
+      status: 404,
       error: 'This user does not exist.',
     });
   }
   if (user.isMentor === true) {
-    return res.status(401).json({
-      status: 401,
+    return res.status(422).json({
+      status: 422,
       error: 'This user is already a mentor',
     });
   }
@@ -42,21 +42,27 @@ exports.userChangeToMentor = (req, res) => {
   });
 };
 exports.allMentors = (req, res) => {
+  const mentorsModel = mentors;
+  mentorsModel.forEach((mentorModel) => {
+    delete mentorModel.password;
+  });
   res.status(200).json({
     status: 200,
-    data: mentors,
+    data: mentorsModel,
   });
 };
 exports.specificMentor = (req, res) => {
   const mentor = mentors.find((mntr) => mntr.mentorId === parseInt(req.params.mentorId));
   if (!mentor) {
-    return res.status(401).json({
-      status: 401,
+    return res.status(404).json({
+      status: 404,
       error: 'This mentor does not exist.',
     });
   }
+  const mentorModel = mentor;
+  delete mentorModel.password;
   res.status(200).json({
     status: 200,
-    data: mentor,
+    data: mentorModel,
   });
 };

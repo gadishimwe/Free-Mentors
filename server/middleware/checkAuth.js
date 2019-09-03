@@ -9,7 +9,7 @@ export default (req, res, next) => {
   } catch (error) {
     return res.status(401).json({
       status: 401,
-      error: 'Forbidden: You must login to proceed',
+      error: 'Unauthorized, You must login to proceed',
     });
   }
 };
