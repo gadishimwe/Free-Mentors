@@ -8,26 +8,26 @@ export default (req, res, next) => {
   const mentor = mentors.find((mntr) => mntr.mentorId === parseInt(req.body.mentorId));
   const isSessionExist = sessions.find((o) => o.mentorId === parseInt(req.body.mentorId) && o.menteeId === user.userId);
   if (!req.body.mentorId) {
-    return res.status(401).json({
-      status: 401,
+    return res.status(400).json({
+      status: 400,
       error: 'MentorId is required. Please provide it.',
     });
   }
   if (!req.body.questions) {
-    return res.status(401).json({
-      status: 401,
+    return res.status(400).json({
+      status: 400,
       error: 'Questions are required. Please provide them.',
     });
   }
   if (!mentor) {
-    return res.status(401).json({
-      status: 401,
+    return res.status(404).json({
+      status: 404,
       error: 'Mentor you entered does not exist.',
     });
   }
   if (isSessionExist) {
-    return res.status(401).json({
-      status: 401,
+    return res.status(422).json({
+      status: 422,
       error: 'Session request already sent.',
     });
   }

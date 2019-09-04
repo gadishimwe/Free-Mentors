@@ -30,7 +30,7 @@ describe('Testing changing user to mentor', () => {
       .patch('/api/v1/user/1000')
       .set('Authorization', AdminToken)
       .end((err, res) => {
-        expect(res).to.have.status(401);
+        expect(res).to.have.status(404);
         done();
       });
   });
@@ -40,7 +40,7 @@ describe('Testing changing user to mentor', () => {
       .patch('/api/v1/user/3')
       .set('Authorization', AdminToken)
       .end((err, res) => {
-        expect(res).to.have.status(401);
+        expect(res).to.have.status(422);
         done();
       });
   });
@@ -74,7 +74,7 @@ describe('Testing viewing specific mentor', () => {
       .get('/api/v1/mentors/90')
       .set('Authorization', AdminToken)
       .end((err, res) => {
-        expect(res).to.have.status(401);
+        expect(res).to.have.status(404);
         done();
       });
   });

@@ -12,7 +12,7 @@ describe('Testing requesting mentorship session', () => {
       .post('/api/v1/sessions')
       .set('Authorization', UserToken)
       .end((err, res) => {
-        expect(res).to.have.status(401);
+        expect(res).to.have.status(400);
         done();
       });
   });
@@ -23,7 +23,7 @@ describe('Testing requesting mentorship session', () => {
       .set('Authorization', UserToken)
       .send({ mentorId: 1 })
       .end((err, res) => {
-        expect(res).to.have.status(401);
+        expect(res).to.have.status(400);
         done();
       });
   });
@@ -34,7 +34,7 @@ describe('Testing requesting mentorship session', () => {
       .set('Authorization', UserToken)
       .send({ mentorId: 1000, questions: 'how to be successful?' })
       .end((err, res) => {
-        expect(res).to.have.status(401);
+        expect(res).to.have.status(404);
         done();
       });
   });
@@ -45,7 +45,7 @@ describe('Testing requesting mentorship session', () => {
       .set('Authorization', UserToken)
       .send({ mentorId: 1, questions: 'how to be successful?' })
       .end((err, res) => {
-        expect(res).to.have.status(401);
+        expect(res).to.have.status(422);
         done();
       });
   });
@@ -79,7 +79,7 @@ describe('Testing mentor can accept session request', () => {
       .patch('/api/v1/sessions/1000/accept')
       .set('Authorization', mentorToken)
       .end((err, res) => {
-        expect(res).to.have.status(401);
+        expect(res).to.have.status(404);
         done();
       });
   });
@@ -99,7 +99,7 @@ describe('Testing mentor can accept session request', () => {
       .patch('/api/v1/sessions/2/accept')
       .set('Authorization', mentorToken)
       .end((err, res) => {
-        expect(res).to.have.status(401);
+        expect(res).to.have.status(422);
         done();
       });
   });
@@ -159,7 +159,7 @@ describe('Testing user can review mentor after mentorship session', () => {
       .post('/api/v1/sessions/1000/review')
       .set('Authorization', UserToken)
       .end((err, res) => {
-        expect(res).to.have.status(401);
+        expect(res).to.have.status(404);
         done();
       });
   });
@@ -179,7 +179,7 @@ describe('Testing user can review mentor after mentorship session', () => {
       .post('/api/v1/sessions/2/review')
       .set('Authorization', UserToken)
       .end((err, res) => {
-        expect(res).to.have.status(401);
+        expect(res).to.have.status(400);
         done();
       });
   });
@@ -190,7 +190,7 @@ describe('Testing user can review mentor after mentorship session', () => {
       .set('Authorization', UserToken)
       .send({ score: 'we' })
       .end((err, res) => {
-        expect(res).to.have.status(401);
+        expect(res).to.have.status(400);
         done();
       });
   });
@@ -201,7 +201,7 @@ describe('Testing user can review mentor after mentorship session', () => {
       .set('Authorization', UserToken)
       .send({ score: 3 })
       .end((err, res) => {
-        expect(res).to.have.status(401);
+        expect(res).to.have.status(400);
         done();
       });
   });
@@ -225,7 +225,7 @@ describe('Testing admin can delete a review', () => {
       .delete('/api/v1/sessions/1000/review')
       .set('Authorization', UserToken)
       .end((err, res) => {
-        expect(res).to.have.status(401);
+        expect(res).to.have.status(404);
         done();
       });
   });

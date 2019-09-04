@@ -5,8 +5,8 @@ import mentors from '../models/mentors';
 export default (req, res, next) => {
   const session = sessions.find((sssn) => sssn.sessionId === parseInt(req.params.sessionId));
   if (!session) {
-    return res.status(401).json({
-      status: 401,
+    return res.status(404).json({
+      status: 404,
       error: 'This session does not exist.',
     });
   }
@@ -15,12 +15,12 @@ export default (req, res, next) => {
   if (mentorUser.userId !== req.userData.userId) {
     return res.status(401).json({
       status: 401,
-      error: 'This session is not yours.',
+      error: `You don't have a session with id ${session.sessionId}.`,
     });
   }
   if (session.status === 'accepted' || session.status === 'rejected') {
-    return res.status(401).json({
-      status: 401,
+    return res.status(422).json({
+      status: 422,
       error: `This session is already ${session.status}`,
     });
   }

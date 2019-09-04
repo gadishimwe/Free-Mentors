@@ -69,8 +69,8 @@ export const reviewMentor = (req, res) => {
 export const deleteReview = (req, res) => {
   const review = reviews.find((rvw) => rvw.sessionId === parseInt(req.params.sessionId));
   if (!review) {
-    return res.status(401).json({
-      status: 401,
+    return res.status(404).json({
+      status: 404,
       error: 'This review does not exist',
     });
   }
