@@ -3,7 +3,7 @@
 import users from '../models/users';
 import mentors from '../models/mentors';
 
-exports.userChangeToMentor = (req, res) => {
+export const userChangeToMentor = (req, res) => {
   const user = users.find((usr) => usr.userId === parseInt(req.params.userId));
   if (!user) {
     return res.status(404).json({
@@ -41,7 +41,7 @@ exports.userChangeToMentor = (req, res) => {
     },
   });
 };
-exports.allMentors = (req, res) => {
+export const allMentors = (req, res) => {
   const mentorsModel = mentors;
   mentorsModel.forEach((mentorModel) => {
     delete mentorModel.password;
@@ -51,7 +51,7 @@ exports.allMentors = (req, res) => {
     data: mentorsModel,
   });
 };
-exports.specificMentor = (req, res) => {
+export const specificMentor = (req, res) => {
   const mentor = mentors.find((mntr) => mntr.mentorId === parseInt(req.params.mentorId));
   if (!mentor) {
     return res.status(404).json({
