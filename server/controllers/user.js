@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable radix */
 import express from 'express';
 import bcrypt from 'bcrypt';
@@ -10,21 +11,24 @@ dotenv.config();
 const app = express();
 app.use(express.json);
 
-exports.usersSignUp = (req, res) => {
+export const usersSignUp = (req, res) => {
   bcrypt.hash(req.body.password, 10, (err, hash) => {
-    const newUser = {
-      userId: users.length + 1,
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      password: hash,
-      address: req.body.address,
-      bio: req.body.bio,
-      occupation: req.body.occupation,
-      expertise: req.body.expertise,
-      isAdmin: false,
-      isMentor: false,
-    };
+    class User {
+      constructor() {
+        this.userId = users.length + 1,
+        this.firstName = req.body.firstName,
+        this.lastName = req.body.lastName,
+        this.email = req.body.email,
+        this.password = hash,
+        this.address = req.body.address,
+        this.bio = req.body.bio,
+        this.occupation = req.body.occupation,
+        this.expertise = req.body.expertise,
+        this.isAdmin = false,
+        this.isMentor = false;
+      }
+    }
+    const newUser = new User();
     const token = jwt.sign(
       {
         email: newUser.email,
@@ -36,7 +40,7 @@ exports.usersSignUp = (req, res) => {
         expiresIn: '7d',
       },
     );
-    users.push(newUser);
+    users.push(new User());
     return res.status(201).json({
       status: 201,
       message: 'User created successfully',
@@ -46,7 +50,7 @@ exports.usersSignUp = (req, res) => {
     });
   });
 };
-exports.usersSignIn = (req, res) => {
+export const usersSignIn = (req, res) => {
   const user = users.find((usr) => usr.email === req.body.email);
   const token = jwt.sign(
     {

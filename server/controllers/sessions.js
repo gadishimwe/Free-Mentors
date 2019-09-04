@@ -49,7 +49,7 @@ exports.allSessions = (req, res) => {
     data: sessions.filter((session) => session.menteeId === parseInt(req.userData.userId)),
   });
 };
-exports.reviewMentor = (req, res) => {
+export const reviewMentor = (req, res) => {
   const session = sessions.find((sssn) => parseInt(req.params.sessionId) === sssn.sessionId);
   const user = users.find((usr) => usr.userId === parseInt(req.userData.userId));
   const newReview = {
@@ -66,7 +66,7 @@ exports.reviewMentor = (req, res) => {
     data: newReview,
   });
 };
-exports.deleteReview = (req, res) => {
+export const deleteReview = (req, res) => {
   const review = reviews.find((rvw) => rvw.sessionId === parseInt(req.params.sessionId));
   if (!review) {
     return res.status(401).json({

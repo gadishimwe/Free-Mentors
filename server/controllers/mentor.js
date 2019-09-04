@@ -3,7 +3,7 @@
 import users from '../models/users';
 import mentors from '../models/mentors';
 
-exports.userChangeToMentor = (req, res) => {
+export const userChangeToMentor = (req, res) => {
   const user = users.find((usr) => usr.userId === parseInt(req.params.userId));
   if (!user) {
     return res.status(401).json({
@@ -41,13 +41,15 @@ exports.userChangeToMentor = (req, res) => {
     },
   });
 };
-exports.allMentors = (req, res) => {
+export const allMentors = (req, res) => {
+  console.log(req.userData);
+  
   res.status(200).json({
     status: 200,
     data: mentors,
   });
 };
-exports.specificMentor = (req, res) => {
+export const specificMentor = (req, res) => {
   const mentor = mentors.find((mntr) => mntr.mentorId === parseInt(req.params.mentorId));
   if (!mentor) {
     return res.status(401).json({
