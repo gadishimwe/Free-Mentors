@@ -89,7 +89,7 @@ describe('Testing mentor can accept session request', () => {
       .patch('/api/v1/sessions/1/accept')
       .set('Authorization', mentorToken)
       .end((err, res) => {
-        expect(res).to.have.status(401);
+        expect(res).to.have.status(404);
         done();
       });
   });

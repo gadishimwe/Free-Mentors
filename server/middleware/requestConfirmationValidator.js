@@ -13,8 +13,8 @@ export default (req, res, next) => {
   const mentor = mentors.find((mntr) => mntr.mentorId === session.mentorId);
   const mentorUser = users.find((usr) => usr.email === mentor.email);
   if (mentorUser.userId !== req.userData.userId) {
-    return res.status(401).json({
-      status: 401,
+    return res.status(404).json({
+      status: 404,
       error: `You don't have a session with id ${session.sessionId}.`,
     });
   }
