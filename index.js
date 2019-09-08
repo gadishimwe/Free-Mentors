@@ -6,6 +6,9 @@ import mentor from './server/routes/mentor';
 import session from './server/routes/session';
 
 
+console.log(process.env.NODE_ENV);
+
+
 const app = express();
 app.use(morgan('dev'));
 
