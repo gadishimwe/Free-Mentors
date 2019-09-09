@@ -36,7 +36,7 @@
   "scripts": {
     "start": "babel-node index.js",
     "dev": "nodemon --exec babel-node index.js",
-    "test": "nyc --reporter=html --reporter=text mocha --require @babel/register server/tests/ --exit",
+    "test": "npm run createTables && nyc --reporter=html --reporter=text mocha --require @babel/register --require @babel/polyfill server/tests/ --exit",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "createTables": "babel-node ./server/models/tablesCreater.js"
   },

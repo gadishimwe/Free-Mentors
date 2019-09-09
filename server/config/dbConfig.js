@@ -8,7 +8,10 @@ let pool;
 
 if (process.env.NODE_ENV === 'development') {
   pool = new Pool({
-    connectionString: process.env.DEV_DB_URL,
+    user: process.env.DB_USER,
+    host: process.env.HOST,
+    database: process.env.DB_NAME,
+    password: process.env.PASSWORD,
   });
 
   pool.on('connect', () => {
