@@ -17,14 +17,6 @@ if (process.env.NODE_ENV === 'development') {
   pool.on('connect', () => {
     console.log('Connected to database...');
   });
-} else if (process.env.NODE_ENV === 'testing') {
-  pool = new Pool({
-    connectionString: process.env.TEST_URL,
-  });
-
-  pool.on('connect', () => {
-    console.log('Connected to database...');
-  });
 } else if (process.env.NODE_ENV === 'production') {
   pool = new Pool({
     connectionString: process.env.PRODUCTION_URL,
