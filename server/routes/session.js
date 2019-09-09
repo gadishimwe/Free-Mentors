@@ -1,4 +1,3 @@
-/* eslint-disable import/named */
 import express from 'express';
 import {
   sessionRequest, sessionAccept, sessionDecline, allSessions, reviewMentor, deleteReview,

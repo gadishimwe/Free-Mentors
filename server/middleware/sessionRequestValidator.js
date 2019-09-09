@@ -1,12 +1,11 @@
-/* eslint-disable radix */
 import users from '../models/users';
 import sessions from '../models/sessions';
 import mentors from '../models/mentors';
 
 export default (req, res, next) => {
   const user = users.find((usr) => usr.email === req.userData.email);
-  const mentor = mentors.find((mntr) => mntr.mentorId === parseInt(req.body.mentorId));
-  const isSessionExist = sessions.find((o) => o.mentorId === parseInt(req.body.mentorId) && o.menteeId === user.userId);
+  const mentor = mentors.find((mntr) => mntr.mentorId === parseInt(req.body.mentorId, 10));
+  const isSessionExist = sessions.find((o) => o.mentorId === parseInt(req.body.mentorId, 10) && o.menteeId === user.userId);
   if (!req.body.mentorId) {
     return res.status(400).json({
       status: 400,
