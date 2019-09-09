@@ -1,9 +1,11 @@
 import Joi from 'joi';
-import users from '../models/users';
+import pool from '../config/dbConfig';
 
-export default (req, res, next) => {
-  const user = users.find((o) => o.email === req.body.email);
-  if (user) {
+export default async (req, res, next) => {
+  const { rows } = await pool.query(`SELECT * FROM 
+  users WHERE email='${req.body.email}'`);
+
+  if (rows.length !== 0) {
     return res.status(422).json({
       status: 422,
       error: 'Email already exists',

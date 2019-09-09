@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import user from './server/routes/user';
 import mentor from './server/routes/mentor';
 import session from './server/routes/session';
+import '@babel/polyfill';
 
 
 console.log(process.env.NODE_ENV);

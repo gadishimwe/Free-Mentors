@@ -19,25 +19,6 @@ describe('testing sign up', () => {
       });
     done();
   });
-  it('should return email already exist', (done) => {
-    const newUser = {
-      email: 'gad@gmail.com',
-      password: 'passssssss',
-      firstName: 'Gad',
-      lastName: 'Ishimwe',
-      address: 'Nyarugenge',
-      bio: 'uhfuif fihwiufhw fuwhfu ufhwufhu',
-      occupation: 'Developer',
-      expertise: 'Javascript',
-    };
-    chai.request(app)
-      .post('/api/v1/auth/signup')
-      .send(newUser)
-      .end((err, res) => {
-        expect(res).to.have.status(422);
-      });
-    done();
-  });
   it('should return User created successfully', (done) => {
     const newUser = {
       email: 'james@gmail.com',
@@ -58,42 +39,23 @@ describe('testing sign up', () => {
         done();
       });
   });
-});
-describe('Testing sign in', () => {
-  it('should return invalid email or password when user entered email with no existing account', (done) => {
-    const invalidCredentials = {
-      email: 'invalid@gmail.com',
-      password: 'jieojf',
+  it('should return email already exist', (done) => {
+    const newUser = {
+      email: 'james@gmail.com',
+      password: 'passssssss',
+      firstName: 'Gad',
+      lastName: 'Ishimwe',
+      address: 'Nyarugenge',
+      bio: 'uhfuif fihwiufhw fuwhfu ufhwufhu',
+      occupation: 'Developer',
+      expertise: 'Javascript',
     };
     chai.request(app)
-      .post('/api/v1/auth/signin')
-      .send(invalidCredentials)
+      .post('/api/v1/auth/signup')
+      .send(newUser)
       .end((err, res) => {
-        expect(res).to.have.status(401);
+        expect(res).to.have.status(422);
       });
     done();
-  });
-  it('should return invalid email or password when user entered valid email but invalid password', (done) => {
-    chai.request(app)
-      .post('/api/v1/auth/signin')
-      .send({ email: 'karake@gmail.com' })
-      .end((err, res) => {
-        expect(res).to.have.status(401);
-      });
-    done();
-  });
-  it('should return User is successfully logged in', (done) => {
-    const user = {
-      email: 'gad@gmail.com',
-      password: 'pass123',
-    };
-    chai.request(app)
-      .post('/api/v1/auth/signin')
-      .send(user)
-      .end((err, res) => {
-        expect(res).to.have.status(200);
-        expect(res.body).to.have.property('data');
-        done();
-      });
   });
 });
