@@ -1,10 +1,8 @@
-/* eslint-disable radix */
-
 import users from '../models/users';
 import mentors from '../models/mentors';
 
 export const userChangeToMentor = (req, res) => {
-  const user = users.find((usr) => usr.userId === parseInt(req.params.userId));
+  const user = users.find((usr) => usr.userId === parseInt(req.params.userId, 10));
   if (!user) {
     return res.status(404).json({
       status: 404,
@@ -17,7 +15,7 @@ export const userChangeToMentor = (req, res) => {
       error: 'This user is already a mentor',
     });
   }
-  const userIndex = users.findIndex((usr) => usr.userId === parseInt(req.params.userId));
+  const userIndex = users.findIndex((usr) => usr.userId === parseInt(req.params.userId, 10));
   users[userIndex].isMentor = true;
 
   const newMentor = {
@@ -52,7 +50,7 @@ export const allMentors = (req, res) => {
   });
 };
 export const specificMentor = (req, res) => {
-  const mentor = mentors.find((mntr) => mntr.mentorId === parseInt(req.params.mentorId));
+  const mentor = mentors.find((mntr) => mntr.mentorId === parseInt(req.params.mentorId, 10));
   if (!mentor) {
     return res.status(404).json({
       status: 404,

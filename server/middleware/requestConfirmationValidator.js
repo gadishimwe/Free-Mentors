@@ -3,7 +3,7 @@ import users from '../models/users';
 import mentors from '../models/mentors';
 
 export default (req, res, next) => {
-  const session = sessions.find((sssn) => sssn.sessionId === parseInt(req.params.sessionId));
+  const session = sessions.find((sssn) => sssn.sessionId === parseInt(req.params.sessionId, 10));
   if (!session) {
     return res.status(404).json({
       status: 404,

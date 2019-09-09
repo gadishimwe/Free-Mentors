@@ -1,11 +1,10 @@
-/* eslint-disable radix */
 import sessions from '../models/sessions';
 import users from '../models/users';
 import mentors from '../models/mentors';
 
 export default (req, res, next) => {
-  const session = sessions.find((sssn) => parseInt(req.params.sessionId) === sssn.sessionId);
-  const user = users.find((usr) => usr.userId === parseInt(req.userData.userId));
+  const session = sessions.find((sssn) => parseInt(req.params.sessionId, 10) === sssn.sessionId);
+  const user = users.find((usr) => usr.userId === parseInt(req.userData.userId, 10));
   if (!session) {
     return res.status(404).json({
       status: 404,
@@ -25,8 +24,7 @@ export default (req, res, next) => {
       error: 'score is required,please provide it.',
     });
   }
-  // eslint-disable-next-line no-restricted-globals
-  if (parseInt(req.body.score) < 1 || parseInt(req.body.score) > 5 || isNaN(req.body.score)) {
+  if (parseInt(req.body.score, 10) < 1 || parseInt(req.body.score, 10) > 5 || isNaN(req.body.score)) {
     return res.status(400).json({
       status: 400,
       error: 'score must 1 to 5, please enter valid score',

@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-expressions */
-/* eslint-disable radix */
 import express from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
@@ -39,7 +37,6 @@ export const usersSignUp = (req, res) => {
     const insert = 'INSERT INTO users(firstName, lastName, email, password, address, bio, occupation, expertise) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *';
     const { rows } = await pool.query(insert,
       [newUser.firstName, newUser.lastName, newUser.email, newUser.password, newUser.address, newUser.bio, newUser.occupation, newUser.expertise]);
-    // users.push(new User());
     return res.status(201).json({
       status: 201,
       message: 'User created successfully',
