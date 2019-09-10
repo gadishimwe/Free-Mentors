@@ -5,6 +5,9 @@
     margin: 0;
     box-sizing: border-box;
 }
+html{
+    height: 100%;
+}
 h1,h3{
     color: #0d0d0d;
 }
@@ -474,3 +477,15 @@ footer{
         padding-left: 40px;
     }
 }
+
+
+@media only screen and (min-width: 1440px){
+    body{
+         max-width: 1440px;
+         margin: auto;
+         min-height: 100%;
+         display: grid;
+         grid-template-rows: auto 1fr auto;
+         
+     }    
+ }
