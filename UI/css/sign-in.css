@@ -104,6 +104,8 @@ header{
 
 section{
     background: url(../assets/join.jpg);
+    background-position: center;
+    background-size: cover;
 }
 .background{
     padding: .7rem;
@@ -292,5 +294,8 @@ footer{
          display: grid;
          grid-template-rows: auto 1fr auto;
          
-     }    
+     }   
+     .background{
+        padding-bottom: 60vh;
+    } 
  }
