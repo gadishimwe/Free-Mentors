@@ -8,6 +8,9 @@
 h1,h3{
     color: #0d0d0d;
 }
+html{
+    height: 100%;
+}
 body{
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1.2em;
@@ -411,3 +414,14 @@ footer{
         padding: 20px;
     }
 }    
+
+@media only screen and (min-width: 1440px){
+    body{
+         max-width: 1440px;
+         margin: auto;
+         min-height: 100%;
+         display: grid;
+         grid-template-rows: auto 1fr auto;
+
+     }    
+ } 
