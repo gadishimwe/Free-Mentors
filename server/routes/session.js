@@ -8,6 +8,7 @@ import checkMentor from '../middleware/checkMentor';
 import reviewMentorValidator from '../middleware/reviewMentorValidator';
 import checkAdmin from '../middleware/checkAdmin';
 import requestConfirmationValidator from '../middleware/requestConfirmationValidator';
+import deleteReviewValidator from '../middleware/deleteReviewValidator';
 
 const router = express.Router();
 
@@ -16,6 +17,6 @@ router.patch('/sessions/:sessionId/accept', [checkAuth, checkMentor, requestConf
 router.patch('/sessions/:sessionId/reject', [checkAuth, checkMentor, requestConfirmationValidator], sessionDecline);
 router.get('/sessions', checkAuth, allSessions);
 router.post('/sessions/:sessionId/review', [checkAuth, reviewMentorValidator], reviewMentor);
-router.delete('/sessions/:sessionId/review', [checkAuth, checkAdmin], deleteReview);
+router.delete('/sessions/:sessionId/review', [checkAuth, checkAdmin, deleteReviewValidator], deleteReview);
 
 export default router;

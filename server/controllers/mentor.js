@@ -3,18 +3,6 @@ import mentors from '../models/mentors';
 
 export const userChangeToMentor = (req, res) => {
   const user = users.find((usr) => usr.userId === parseInt(req.params.userId, 10));
-  if (!user) {
-    return res.status(404).json({
-      status: 404,
-      error: 'This user does not exist.',
-    });
-  }
-  if (user.isMentor === true) {
-    return res.status(422).json({
-      status: 422,
-      error: 'This user is already a mentor',
-    });
-  }
   const userIndex = users.findIndex((usr) => usr.userId === parseInt(req.params.userId, 10));
   users[userIndex].isMentor = true;
 
@@ -51,12 +39,6 @@ export const allMentors = (req, res) => {
 };
 export const specificMentor = (req, res) => {
   const mentor = mentors.find((mntr) => mntr.mentorId === parseInt(req.params.mentorId, 10));
-  if (!mentor) {
-    return res.status(404).json({
-      status: 404,
-      error: 'This mentor does not exist.',
-    });
-  }
   const mentorModel = mentor;
   delete mentorModel.password;
   res.status(200).json({

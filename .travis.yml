@@ -7,8 +7,7 @@ cache:
 services:
 - postgresql
 before_script:
-  - npm install
-  - psql -c "create database freementors;" -U postgres
+  - psql -c 'create database freementors;' -U postgres
 script:
   - npm test
 after_success:
