@@ -4,6 +4,8 @@ node_js:
 cache:
   directories:
     - "node_modules"
+services:
+- postgresql
 before_script:
   - npm install
   - psql -c "create database freementors;" -U postgres
