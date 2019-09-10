@@ -9,6 +9,7 @@ html{
     height: 100%;
 }
 body{
+    height: 100%;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1.2em;
     line-height: 1.5;
@@ -295,8 +296,19 @@ footer{
     }
 
 @media only screen and (min-width: 1440px){
-    body{
-        max-width: 1440px;        
+    header{
+        border-bottom: #3359df solid 5px;
+        height: 120px;
+        display: flex;
+    }
+    .container{
+        max-width: 1440px;
+        border-bottom: none;
+        margin: auto;
+    }
+    section{
+        margin: auto;
+        width: 1440px;        
     }
     .section1{
         margin: auto;
