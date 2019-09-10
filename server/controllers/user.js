@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import pool from '../config/dbConfig';
+import { encrypter } from '../helpers/tokenHandler';
 
 dotenv.config();
 
@@ -24,19 +25,13 @@ export const usersSignUp = (req, res) => {
       }
     }
     const newUser = new User();
-    const token = jwt.sign(
-      {
-        email: newUser.email,
-        userId: newUser.userId,
-      },
-      process.env.JWT_KEY,
-      {
-        expiresIn: '7d',
-      },
-    );
+
+
     const insert = 'INSERT INTO users(firstName, lastName, email, password, address, bio, occupation, expertise) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *';
     const { rows } = await pool.query(insert,
       [newUser.firstName, newUser.lastName, newUser.email, newUser.password, newUser.address, newUser.bio, newUser.occupation, newUser.expertise]);
+    const token = encrypter(rows[0].email, rows[0].userid);
+
     return res.status(201).json({
       status: 201,
       message: 'User created successfully',
@@ -48,18 +43,7 @@ export const usersSignUp = (req, res) => {
 };
 export const usersSignIn = (req, res) => {
   const user = users.find((usr) => usr.email === req.body.email);
-  const token = jwt.sign(
-    {
-      userId: user.userId,
-      email: user.email,
-      isAdmin: user.isAdmin,
-      isMentor: user.isMentor,
-    },
-    process.env.JWT_KEY,
-    {
-      expiresIn: '7d',
-    },
-  );
+  const token = encrypter(user.email);
   res.status(200).json({
     status: 200,
     message: 'User is successfully logged in',

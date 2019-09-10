@@ -5,9 +5,6 @@
     margin: 0;
     box-sizing: border-box;
 }
-html{
-    height: 100%;
-}
 body{
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1.2em;
@@ -99,6 +96,7 @@ header{
 .navigation a:hover{
     color: rgb(0, 230, 0);
     background: #0d418f;
+    box-shadow: -.3rem .5rem .2rem rgba(0, 0, 0, .2);
 }
 .navigation a:active{
     color: rgb(37, 158, 37);
@@ -109,8 +107,6 @@ header{
 section{
     height: 100%;
     background: url(../assets/join.jpg);
-    background-position: center;
-    background-size: cover;
 }
 .background{
     height: 100%;
@@ -271,6 +267,8 @@ footer{
         padding: 5px 10px;
     }
     .navigation a:hover{
+        border-radius: 2em;
+        box-shadow: 0 .5rem .3rem rgba(0, 0, 0, .3);
         background: unset;
     }
     .navigation a:active{
@@ -290,8 +288,6 @@ footer{
     .section2{
         margin-top: 50px;
     }
-}
-
 
 @media only screen and (min-width: 1440px){
     body{
@@ -301,4 +297,4 @@ footer{
    max-height: 600px;
    margin: auto;
    } 
- }
+}
