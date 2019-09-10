@@ -12,6 +12,7 @@ h1,h3,b{
     color: #0d0d0d;
 }
 body{
+    height: 100%;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1.2em;
     color: #586069;
@@ -540,7 +541,17 @@ footer{
 }
 
 @media only screen and (min-width: 1440px){
-    body{
+    header{
+        border-bottom: #3359df solid 5px;
+        height: 120px;
+        display: flex;
+    }
+    .container{
+        max-width: 1440px;
+        border-bottom: none;
+        margin: auto;
+    }
+    .main{
          max-width: 1440px;
          margin: auto;
          min-height: 100%;
