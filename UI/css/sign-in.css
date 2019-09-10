@@ -5,6 +5,9 @@
     margin: 0;
     box-sizing: border-box;
 }
+html{
+    height: 100%;
+}
 body{
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1.2em;
@@ -107,6 +110,8 @@ header{
 section{
     height: 100%;
     background: url(../assets/join.jpg);
+    background-position: center;
+    background-size: cover;
 }
 .background{
     height: 100%;
@@ -286,12 +291,16 @@ footer{
         padding: 50px;
     }
     .section2{
+        max-height: 420px;
         margin-top: 50px;
     }
 
 @media only screen and (min-width: 1440px){
     body{
         max-width: 1440px;        
+    }
+    .section1{
+        margin: auto;
     }   
    .section2{
    max-height: 600px;
