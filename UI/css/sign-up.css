@@ -13,6 +13,10 @@ body{
     font-size: 1.2em;
     line-height: 1.5;
     text-align: center;
+    margin: auto;
+    min-height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
 }
 
 /* header */
@@ -95,6 +99,7 @@ header{
 .navigation a:hover{
     color: rgb(0, 230, 0);
     background: #0d418f;
+    box-shadow: -.3rem .5rem .2rem rgba(0, 0, 0, .2);
 }
 .navigation a:active{
     color: rgb(37, 158, 37);
@@ -102,17 +107,20 @@ header{
 
 /* Section area */
 section{
+    height: 100%;
     background: url(../assets/join.jpg);
     background-position: center;
     background-size: cover;
 }
 .background{
+    height: 100%;
     padding: .7rem;
     display: grid;
     grid-template-columns: 1fr;
     background: rgba(0, 0, 0, 0.8);
 }
 .section1{
+    margin: auto;
     color: white;
 }
 .section1 h1{
@@ -124,7 +132,7 @@ section{
     max-width: 380px;
     border-radius: 6px;
     padding: .7em;
-    margin-bottom: 200px;
+    margin-bottom: 20px;
 
 }
 .section2 .small-logo{
@@ -262,6 +270,8 @@ footer{
         padding: 5px 10px;
     }
     .navigation a:hover{
+        border-radius: 2em;
+        box-shadow: 0 .5rem .3rem rgba(0, 0, 0, .3);
         background: unset;
     }
     .navigation a:active{
@@ -279,22 +289,22 @@ footer{
         padding: 50px;
     }
     .section2{
-        margin-top: 50px;
+        max-height: 550px;
+        margin-top: 50px; 
+        margin: auto;       
     }
-}
+
 
 
 @media only screen and (min-width: 1440px){
     body{
-         max-width: 1440px;
-         margin: auto;
-         min-height: 100%;
-         display: grid;
-         grid-template-rows: auto 1fr auto;
-         
-     }  
-     .background{
-        padding-bottom: 55vh;
-    } 
+         max-width: 1440px;        
+     }   
+    .section1{
+        margin: auto;
+    }
+    .section2{
+    max-height: 600px;
+    }
+}
 
- }
