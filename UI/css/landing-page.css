@@ -271,8 +271,6 @@ footer{
         padding: 5px 10px;
     }
     .navigation a:hover{
-        border-radius: 2em;
-        box-shadow: 0 .5rem .3rem rgba(0, 0, 0, .3);
         background: unset;
     }
     .navigation a:active{
@@ -317,3 +315,17 @@ footer{
         margin-right: 20px;
     }
 }
+
+@media only screen and (min-width: 1440px){
+    body{
+         max-width: 1440px;
+         margin: auto;
+         min-height: 100%;
+         display: grid;
+         grid-template-rows: auto 1fr auto;
+
+     }  
+     .sect1{
+        min-height: 700px;
+    }  
+ } 
