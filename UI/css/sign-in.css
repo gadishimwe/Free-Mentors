@@ -13,6 +13,10 @@ body{
     font-size: 1.2em;
     line-height: 1.5;
     text-align: center;
+    margin: auto;
+    min-height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
 }
 
 /* header */
@@ -103,11 +107,13 @@ header{
 /* Section area */
 
 section{
+    height: 100%;
     background: url(../assets/join.jpg);
     background-position: center;
     background-size: cover;
 }
 .background{
+    height: 100%;
     padding: .7rem;
     display: grid;
     grid-template-columns: 1fr;
@@ -115,6 +121,7 @@ section{
 }
 .section1{
     color: white;
+    margin: auto;
 }
 .section1 h1{
     max-width: 400px;
@@ -288,14 +295,10 @@ footer{
 
 @media only screen and (min-width: 1440px){
     body{
-         max-width: 1440px;
-         margin: auto;
-         min-height: 100%;
-         display: grid;
-         grid-template-rows: auto 1fr auto;
-         
-     }   
-     .background{
-        padding-bottom: 60vh;
-    } 
+        max-width: 1440px;        
+    }   
+   .section2{
+   max-height: 600px;
+   margin: auto;
+   } 
  }
