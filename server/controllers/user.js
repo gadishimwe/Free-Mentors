@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import pool from '../config/dbConfig';
 import { encrypter } from '../helpers/tokenHandler';
+import { select } from '../helpers/sqlQuery';
 
 dotenv.config();
 
@@ -40,9 +41,9 @@ export const usersSignUp = async (req, res) => {
     },
   });
 };
-export const usersSignIn = async (req, res) => {
-  const { rows } = await pool.query(`SELECT userid, email FROM users WHERE email='${req.body.email}';`);
-  const token = encrypter(rows[0].email, rows[0].userid);
+export const usersSignIn = (req, res) => {
+  const rows = select('userid, email', 'users', `email='${req.body.email}'`);
+  const token = encrypter(rows.email, rows.userid);
   res.status(200).json({
     status: 200,
     message: 'User is successfully logged in',
