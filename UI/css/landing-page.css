@@ -331,12 +331,10 @@ footer{
         border-bottom: none;
         margin: auto;
     }
-    section{
+    .main{
          max-width: 1440px;
          margin: auto;
          min-height: 100%;
-         display: grid;
-         grid-template-rows: auto 1fr auto;
 
      }  
      .sect1{

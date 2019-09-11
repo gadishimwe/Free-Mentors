@@ -1,15 +1,15 @@
 import bcrypt from 'bcrypt';
-import users from '../models/users';
+import { select } from '../helpers/sqlQuery';
 
-export default (req, res, next) => {
-  const user = users.find((o) => o.email === req.body.email);
-  if (!user) {
+export default async (req, res, next) => {
+  const rows = await select('email, password', 'users', `email='${req.body.email}'`);
+  if (!rows) {
     return res.status(401).json({
       status: 401,
       error: 'Invalid email or password',
     });
   }
-  bcrypt.compare(req.body.password, user.password, (err, userPassword) => {
+  bcrypt.compare(req.body.password, rows.password, (err, userPassword) => {
     if (userPassword) {
       return next();
     }

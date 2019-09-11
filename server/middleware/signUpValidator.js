@@ -1,11 +1,9 @@
 import Joi from 'joi';
-import pool from '../config/dbConfig';
+import { select } from '../helpers/sqlQuery';
 
 export default async (req, res, next) => {
-  const { rows } = await pool.query(`SELECT * FROM 
-  users WHERE email='${req.body.email}'`);
-
-  if (rows.length !== 0) {
+  const rows = await select('email', 'users', `email='${req.body.email}'`);
+  if (rows) {
     return res.status(422).json({
       status: 422,
       error: 'Email already exists',
