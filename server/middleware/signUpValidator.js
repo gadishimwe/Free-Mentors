@@ -3,7 +3,7 @@ import pool from '../config/dbConfig';
 
 export default async (req, res, next) => {
   const { rows } = await pool.query(`SELECT * FROM 
-  users WHERE email='${req.body.email}'`);
+  users WHERE email='${req.body.email}';`);
 
   if (rows.length !== 0) {
     return res.status(422).json({
