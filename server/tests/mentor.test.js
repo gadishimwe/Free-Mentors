@@ -41,7 +41,7 @@ describe('Testing changing user to mentor', () => {
   });
   it('should return This user is already a mentor', (done) => {
     chai.request(app)
-      .patch('/api/v1/user/4')
+      .patch('/api/v1/user/9')
       .set('Authorization', adminToken)
       .end((err, res) => {
         expect(res).to.have.status(422);

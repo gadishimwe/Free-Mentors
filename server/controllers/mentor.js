@@ -1,5 +1,6 @@
-import { update } from '../helpers/sqlQuery';
+import { update, select } from '../helpers/sqlQuery';
 import mentors from '../models/mentors';
+
 
 export const userChangeToMentor = async (req, res) => {
   await update('users', `ismentor=${true}`, `userid='${req.params.userId}'`);
@@ -10,14 +11,11 @@ export const userChangeToMentor = async (req, res) => {
     },
   });
 };
-export const allMentors = (req, res) => {
-  const mentorsModel = mentors;
-  mentorsModel.forEach((mentorModel) => {
-    delete mentorModel.password;
-  });
+export const allMentors = async (req, res) => {
+  const rows = await select('*', 'users', `ismentor='${true}'`);
   res.status(200).json({
     status: 200,
-    data: mentorsModel,
+    data: rows,
   });
 };
 export const specificMentor = (req, res) => {

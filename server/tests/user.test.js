@@ -20,6 +20,7 @@ describe('testing sign up', () => {
   });
   it('should return User created successfully', (done) => {
     const newUser = {
+      userId: 100,
       email: 'james@gmail.com',
       password: 'james123',
       firstName: 'james',
@@ -88,8 +89,8 @@ describe('Testing sign in', () => {
   });
   it('should return User is successfully logged in', (done) => {
     const user = {
-      email: 'mentor1@gmail.com',
-      password: 'mentor1123',
+      email: 'gad@gmail.com',
+      password: 'gadish123',
     };
     chai.request(app)
       .post('/api/v1/auth/signin')

@@ -9,7 +9,7 @@ export const insert = async (table, dataStructure, values, data) => {
 
 export const select = async (data, table, condition) => {
   const { rows } = await pool.query(`SELECT ${data} FROM ${table} WHERE ${condition};`);
-  return rows[0];
+  return rows;
 };
 
 export const update = async (table, columns, condition) => {

@@ -26,8 +26,8 @@ export const usersSignUp = async (req, res) => {
 
   const newUser = new User();
 
-  const rows = insert('users', 'firstName, lastName, email, password, address, bio, occupation, expertise', '$1, $2, $3, $4, $5, $6, $7, $8',
-    [newUser.firstName, newUser.lastName, newUser.email, newUser.password, newUser.address, newUser.bio, newUser.occupation, newUser.expertise]);
+  const rows = insert('users', 'userid', 'firstName, lastName, email, password, address, bio, occupation, expertise', '$1, $2, $3, $4, $5, $6, $7, $8, $9',
+    [newUser.userid, newUser.firstName, newUser.lastName, newUser.email, newUser.password, newUser.address, newUser.bio, newUser.occupation, newUser.expertise]);
   const token = encrypter(rows.email, rows.userid);
 
   return res.status(201).json({
@@ -40,7 +40,7 @@ export const usersSignUp = async (req, res) => {
 };
 export const usersSignIn = async (req, res) => {
   const rows = await select('userid, email', 'users', `email='${req.body.email}'`);
-  const token = encrypter(rows.email, rows.userid);
+  const token = encrypter(rows[0].email, rows[0].userid);
   res.status(200).json({
     status: 200,
     message: 'User is successfully logged in',
