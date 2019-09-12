@@ -40,7 +40,8 @@ const createTables = `
   `;
 
 pool.query(createTables).then(() => {
-  pool.end();
+console.log('Tables created');
+
 }).catch((err) => {
   console.log(err.message);
   process.exit(0);
