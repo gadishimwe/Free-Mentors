@@ -13,6 +13,7 @@ export const usersSignUp = async (req, res) => {
   const hashedPassword = await bcrypt.hash(req.body.password, 10);
   class User {
     constructor() {
+      this.userId = req.body.userId,
       this.firstName = req.body.firstName,
       this.lastName = req.body.lastName,
       this.email = req.body.email,
@@ -26,10 +27,9 @@ export const usersSignUp = async (req, res) => {
 
   const newUser = new User();
 
-  const rows = insert('users', 'userid', 'firstName, lastName, email, password, address, bio, occupation, expertise', '$1, $2, $3, $4, $5, $6, $7, $8, $9',
-    [newUser.userid, newUser.firstName, newUser.lastName, newUser.email, newUser.password, newUser.address, newUser.bio, newUser.occupation, newUser.expertise]);
+  const rows = await insert('users', 'firstname, lastname, email, password, address, bio, occupation, expertise', '$1, $2, $3, $4, $5, $6, $7, $8',
+    [newUser.firstName, newUser.lastName, newUser.email, newUser.password, newUser.address, newUser.bio, newUser.occupation, newUser.expertise]);
   const token = encrypter(rows.email, rows.userid);
-
   return res.status(201).json({
     status: 201,
     message: 'User created successfully',
