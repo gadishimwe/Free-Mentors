@@ -1,13 +1,13 @@
+/* eslint-disable max-len */
 import bcrypt from 'bcrypt';
 import pool from '../config/dbConfig';
-import { insert, update } from '../helpers/sqlQuery';
 
 
 console.log(process.env.NODE_ENV);
 
 
 const createTables = `
-    DROP TABLE IF EXISTS users CASCADE;
+    DROP TABLE IF EXISTS users, sessions, reviews;
     CREATE TABLE IF NOT EXISTS users(
         userid SERIAL PRIMARY KEY,
         email VARCHAR(30) UNIQUE NOT NULL,
@@ -22,17 +22,17 @@ const createTables = `
         isMentor BOOLEAN DEFAULT FALSE
     );
     CREATE TABLE IF NOT EXISTS sessions(
-        sessionId INT PRIMARY KEY,
-        mentorId INT references users(userId) ON DELETE CASCADE,
-        menteeId INT references users(userId) ON DELETE CASCADE,
+        sessionId SERIAL PRIMARY KEY,
+        mentorId INT NOT NULL,
+        menteeId INT NOT NULL,
         questions VARCHAR(256) NOT NULL,
-        menteeEmail VARCHAR(30) UNIQUE NOT NULL,
+        menteeEmail VARCHAR(30) NOT NULL,
         status VARCHAR(10) NOT NULL
     );
     CREATE TABLE IF NOT EXISTS reviews(
         sessionId INT references sessions(sessionId) ON DELETE CASCADE,
-        mentorId INT references users(userId) ON DELETE CASCADE,
-        menteeId INT references users(userId) ON DELETE CASCADE,
+        mentorId INT NOT NULL,
+        menteeId INT NOT NULL,
         score INT NOT NULL,
         menteeFullName VARCHAR(40) NOT NULL,
         remark VARCHAR(256) NOT NULL
@@ -113,27 +113,58 @@ const mentor6 = {
   password: 'mentor6123',
 };
 
-const creater = async (userid, email, password, isAdmin, isMentor) => {
+const userCreater = async (userid, email, password, isAdmin, isMentor) => {
   const hashedPassword = await bcrypt.hash(`${password}`, 10);
   pool.query('INSERT INTO users (userid, email, firstname, lastname, password, address, bio, occupation, expertise, isadmin, ismentor) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *',
     [userid, `${email}`, 'Gad', 'Ishimwe', `${hashedPassword}`, 'kigali', 'I am software developer', 'coding', 'javascript', `${isAdmin}`, `${isMentor}`]);
 };
 
-const mock = () => {
-  creater(admin.userid, admin.email, admin.password, true, false);
+userCreater(admin.userid, admin.email, admin.password, true, false);
 
-  creater(user1.userid, user1.email, user1.password, false, false);
-  creater(user2.userid, user2.email, user2.password, false, false);
-  creater(user3.userid, user3.email, user3.password, false, false);
-  creater(user4.userid, user4.email, user4.password, false, false);
-  creater(user5.userid, user5.email, user5.password, false, false);
-  creater(user6.userid, user6.email, user6.password, false, false);
+userCreater(user1.userid, user1.email, user1.password, false, false);
+userCreater(user2.userid, user2.email, user2.password, false, false);
+userCreater(user3.userid, user3.email, user3.password, false, false);
+userCreater(user4.userid, user4.email, user4.password, false, false);
+userCreater(user5.userid, user5.email, user5.password, false, false);
+userCreater(user6.userid, user6.email, user6.password, false, false);
 
-  creater(mentor1.userid, mentor1.email, mentor1.password, false, true);
-  creater(mentor2.userid, mentor2.email, mentor2.password, false, true);
-  creater(mentor3.userid, mentor3.email, mentor3.password, false, true);
-  creater(mentor4.userid, mentor4.email, mentor4.password, false, true);
-  creater(mentor5.userid, mentor5.email, mentor5.password, false, true);
-  creater(mentor6.userid, mentor6.email, mentor6.password, false, true);
+userCreater(mentor1.userid, mentor1.email, mentor1.password, false, true);
+userCreater(mentor2.userid, mentor2.email, mentor2.password, false, true);
+userCreater(mentor3.userid, mentor3.email, mentor3.password, false, true);
+userCreater(mentor4.userid, mentor4.email, mentor4.password, false, true);
+userCreater(mentor5.userid, mentor5.email, mentor5.password, false, true);
+userCreater(mentor6.userid, mentor6.email, mentor6.password, false, true);
+
+const session1 = {
+  sessionId: 1000,
+  mentorId: 4004,
+  menteeId: 4000,
+  questions: 'how can you.....?',
+  menteeEmail: 'user4@gmail.com',
+  status: 'pending',
 };
-mock();
+const session2 = {
+  sessionId: 2000,
+  mentorId: 5005,
+  menteeId: 5000,
+  questions: 'how can you.....?',
+  menteeEmail: 'user5@gmail.com',
+  status: 'accepted',
+};
+const session3 = {
+  sessionId: 3000,
+  mentorId: 6006,
+  menteeId: 6000,
+  questions: 'how can you.....?',
+  menteeEmail: 'user6@gmail.com',
+  status: 'rejected',
+};
+
+const sessionCreater = (sessionId, mentorId, menteeId, questions, menteeEmail, status) => {
+  pool.query('INSERT INTO sessions (sessionId, mentorId, menteeId, questions, menteeEmail, status) VALUES($1, $2, $3, $4, $5, $6) RETURNING *',
+    [sessionId, mentorId, menteeId, questions, menteeEmail, status]);
+};
+
+sessionCreater(session1.sessionId, session1.mentorId, session1.menteeId, session1.questions, session1.menteeEmail, session1.status);
+sessionCreater(session2.sessionId, session2.mentorId, session2.menteeId, session2.questions, session2.menteeEmail, session2.status);
+sessionCreater(session3.sessionId, session3.mentorId, session3.menteeId, session3.questions, session3.menteeEmail, session3.status);

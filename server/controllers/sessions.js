@@ -1,22 +1,22 @@
-import sessions from '../models/sessions';
-import users from '../models/users';
-import mentors from '../models/mentors';
-import reviews from '../models/reviews';
+import { select, insert } from '../helpers/sqlQuery';
 
-export const sessionRequest = (req, res) => {
-  const user = users.find((usr) => usr.email === req.userData.email);
+export const sessionRequest = async (req, res) => {
+  const user = await select('userid', 'users', `userid='${req.userData.userId}'`);
+  const mentor = await select('userid', 'users', `userid='${req.body.mentorId}'`);
+
   const newSession = {
-    sessionId: sessions.length + 1,
-    mentorId: parseInt(req.body.mentorId, 10),
-    menteeId: user.userId,
+    mentorId: mentor[0].userid,
+    menteeId: user[0].userid,
     questions: req.body.questions,
     menteeEmail: req.userData.email,
     status: 'pending',
   };
-  sessions.push(newSession);
+
+  const session = await insert('sessions', 'mentorid, menteeid, questions, menteeEmail, status', '$1, $2, $3, $4, $5',
+    [newSession.mentorId, newSession.menteeId, newSession.questions, newSession.menteeEmail, newSession.status]);
   res.status(200).json({
     status: 200,
-    data: newSession,
+    data: session,
   });
 };
 export const sessionAccept = (req, res) => {
