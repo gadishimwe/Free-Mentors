@@ -3,7 +3,7 @@ import { select } from '../helpers/sqlQuery';
 
 export default async (req, res, next) => {
   const rows = await select('email', 'users', `email='${req.body.email}'`);
-  if (rows) {
+  if (rows[0]) {
     return res.status(422).json({
       status: 422,
       error: 'Email already exists',
@@ -18,6 +18,7 @@ export default async (req, res, next) => {
     bio: Joi.string().min(20).required(),
     occupation: Joi.string().min(5).required(),
     expertise: Joi.string().min(5).required(),
+    userId: Joi.number(),
 
   };
 
