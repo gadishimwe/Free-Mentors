@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import pool from '../config/dbConfig';
-import { insert } from '../helpers/sqlQuery';
+import { insert, update } from '../helpers/sqlQuery';
 
 
 console.log(process.env.NODE_ENV);
@@ -46,9 +46,29 @@ pool.query(createTables).then(() => {
   process.exit(0);
 });
 
-const adminCreater = async () => {
-  const hashedPassword = await bcrypt.hash('gadish123', 10);
-  await insert('users', 'email, firstname, lastname, password, address, bio, occupation, expertise, isadmin', '$1, $2, $3, $4, $5, $6, $7, $8, $9', ['gad@gmail.com', 'Gad', 'Ishimwe', `${hashedPassword}`, 'kigali', 'I am software developer', 'coding', 'javascript', true]);
+const admin = {
+  email: 'gad@gmail.com',
+};
+const user1 = {
+  email: 'user1@gmail.com',
+  password: 'user1123',
+};
+const user2 = {
+  email: 'user2@gmail.com',
+  password: 'user2123',
+};
+const mentor1 = {
+  email: 'mentor1@gmail.com',
+  password: 'mentor1123',
 };
 
-adminCreater();
+const creater = async (email, password, isAdmin, isMentor) => {
+  const hashedPassword = await bcrypt.hash(`${password}`, 10);
+  await insert('users', 'email, firstname, lastname, password, address, bio, occupation, expertise, isadmin, ismentor', '$1, $2, $3, $4, $5, $6, $7, $8, $9, $10',
+    [`${email}`, 'Gad', 'Ishimwe', `${hashedPassword}`, 'kigali', 'I am software developer', 'coding', 'javascript', `${isAdmin}`, `${isMentor}` ]);
+};
+
+creater(admin.email, admin.password, true, false);
+creater(user1.email, user1.password, false, false);
+creater(user2.email, user2.password, false, false);
+creater(mentor1.email, mentor1.password, false, true);

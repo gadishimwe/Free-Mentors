@@ -2,7 +2,6 @@ import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../../server';
 
-
 chai.use(chaiHttp);
 
 describe('testing sign up', () => {
@@ -41,7 +40,7 @@ describe('testing sign up', () => {
   });
   it('should return email already exist', (done) => {
     const newUser = {
-      email: 'james@gmail.com',
+      email: 'gad@gmail.com',
       password: 'passssssss',
       firstName: 'Gad',
       lastName: 'Ishimwe',
@@ -75,9 +74,13 @@ describe('Testing sign in', () => {
     done();
   });
   it('should return invalid email or password when user entered valid email but invalid password', (done) => {
+    const user = {
+      email: 'gad@gmail.com',
+      password: 'jjj',
+    };
     chai.request(app)
       .post('/api/v1/auth/signin')
-      .send({ email: 'james@gmail.com' })
+      .send(user)
       .end((err, res) => {
         expect(res).to.have.status(401);
       });
@@ -85,8 +88,8 @@ describe('Testing sign in', () => {
   });
   it('should return User is successfully logged in', (done) => {
     const user = {
-      email: 'james@gmail.com',
-      password: 'james123',
+      email: 'mentor1@gmail.com',
+      password: 'mentor1123',
     };
     chai.request(app)
       .post('/api/v1/auth/signin')

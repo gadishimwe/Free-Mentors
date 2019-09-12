@@ -1,25 +1,8 @@
-import users from '../models/users';
+import { update } from '../helpers/sqlQuery';
 import mentors from '../models/mentors';
 
-export const userChangeToMentor = (req, res) => {
-  const user = users.find((usr) => usr.userId === parseInt(req.params.userId, 10));
-  const userIndex = users.findIndex((usr) => usr.userId === parseInt(req.params.userId, 10));
-  users[userIndex].isMentor = true;
-
-  const newMentor = {
-    mentorId: mentors.length + 1,
-    firstName: user.firstName,
-    lastName: user.lastName,
-    email: user.email,
-    password: user.password,
-    address: user.address,
-    bio: user.bio,
-    occupation: user.occupation,
-    expertise: user.expertise,
-    isAdmin: false,
-    isMentor: user.isMentor,
-  };
-  mentors.push(newMentor);
+export const userChangeToMentor = async (req, res) => {
+  await update('users', `ismentor=${true}`, `userid='${req.params.userId}'`);
   res.status(200).json({
     status: 200,
     data: {
