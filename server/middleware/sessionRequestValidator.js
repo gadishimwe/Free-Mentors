@@ -1,11 +1,6 @@
-import users from '../models/users';
-import sessions from '../models/sessions';
-import mentors from '../models/mentors';
+import { select } from '../helpers/sqlQuery';
 
-export default (req, res, next) => {
-  const user = users.find((usr) => usr.email === req.userData.email);
-  const mentor = mentors.find((mntr) => mntr.mentorId === parseInt(req.body.mentorId, 10));
-  const isSessionExist = sessions.find((o) => o.mentorId === parseInt(req.body.mentorId, 10) && o.menteeId === user.userId);
+export default async (req, res, next) => {
   if (!req.body.mentorId) {
     return res.status(400).json({
       status: 400,
@@ -18,13 +13,17 @@ export default (req, res, next) => {
       error: 'Questions are required. Please provide them.',
     });
   }
-  if (!mentor) {
+
+  const mentor = await select('userid', 'users', `userid='${req.body.mentorId}' AND ismentor=${true}`);
+  if (!mentor[0]) {
     return res.status(404).json({
       status: 404,
       error: 'Mentor you entered does not exist.',
     });
   }
-  if (isSessionExist) {
+
+  const isSessionExist = await select('sessionid', 'sessions', `menteeid='${req.userData.userId}' AND mentorid='${mentor[0].userid}'`);
+  if (isSessionExist[0]) {
     return res.status(422).json({
       status: 422,
       error: 'Session request already sent.',
