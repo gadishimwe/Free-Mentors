@@ -18,7 +18,6 @@ export default async (req, res, next) => {
     bio: Joi.string().min(20).required(),
     occupation: Joi.string().min(5).required(),
     expertise: Joi.string().min(5).required(),
-    userId: Joi.number(),
 
   };
 

@@ -12,18 +12,16 @@ export const userChangeToMentor = async (req, res) => {
   });
 };
 export const allMentors = async (req, res) => {
-  const rows = await select('*', 'users', `ismentor='${true}'`);
+  const rows = await select('userid, firstname, lastname, email, address, bio, occupation, expertise, ismentor', 'users', `ismentor='${true}'`);
   res.status(200).json({
     status: 200,
     data: rows,
   });
 };
-export const specificMentor = (req, res) => {
-  const mentor = mentors.find((mntr) => mntr.mentorId === parseInt(req.params.mentorId, 10));
-  const mentorModel = mentor;
-  delete mentorModel.password;
+export const specificMentor = async (req, res) => {
+  const rows = await select('userid, firstname, lastname, email, address, bio, occupation, expertise, ismentor', 'users', `userid='${req.params.userId}'`);
   res.status(200).json({
     status: 200,
-    data: mentorModel,
+    data: rows[0],
   });
 };

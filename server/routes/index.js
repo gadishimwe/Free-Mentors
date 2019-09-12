@@ -14,6 +14,10 @@ app.get('/', (req, res) => {
   res.end(`<h1>WELCOME TO FREE MENTORS</h1>\nTo get started with Free Mentors API, use this <a href="https://documenter.getpostman.com/view/8672875/SVfUt7Zy
       ">documentation.</a>`);
 });
+app.use((req, res) => res.status(400).json({
+  status: 400,
+  data: 'No such endpoint',
+}));
 
 
 export default app;

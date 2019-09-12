@@ -20,7 +20,6 @@ describe('testing sign up', () => {
   });
   it('should return User created successfully', (done) => {
     const newUser = {
-      userId: 100,
       email: 'james@gmail.com',
       password: 'james123',
       firstName: 'james',

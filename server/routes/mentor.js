@@ -9,6 +9,6 @@ const router = express.Router();
 
 router.patch('/user/:userId', [checkAuth, checkAdmin, userToMentorValidator], userChangeToMentor);
 router.get('/mentors', checkAuth, allMentors);
-router.get('/mentors/:mentorId', [checkAuth, specificMentorExist], specificMentor);
+router.get('/mentors/:userId', [checkAuth, specificMentorExist], specificMentor);
 
 export default router;
