@@ -10,7 +10,7 @@ export const encrypter = (email, userId) => {
   },
   process.env.JWT_KEY,
   {
-    expiresIn: '15d',
+    expiresIn: '1h',
   });
   return token;
 };

@@ -30,7 +30,7 @@ const createTables = `
         status VARCHAR(10) NOT NULL
     );
     CREATE TABLE IF NOT EXISTS reviews(
-        sessionId INT references sessions(sessionId) ON DELETE CASCADE,
+        sessionId INT NOT NULL,
         mentorId INT NOT NULL,
         menteeId INT NOT NULL,
         score INT NOT NULL,
@@ -115,7 +115,7 @@ const mentor6 = {
 
 const userCreater = async (userid, email, password, isAdmin, isMentor) => {
   const hashedPassword = await bcrypt.hash(`${password}`, 10);
-  pool.query('INSERT INTO users (userid, email, firstname, lastname, password, address, bio, occupation, expertise, isadmin, ismentor) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *',
+  await pool.query('INSERT INTO users (userid, email, firstname, lastname, password, address, bio, occupation, expertise, isadmin, ismentor) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *',
     [userid, `${email}`, 'Gad', 'Ishimwe', `${hashedPassword}`, 'kigali', 'I am software developer', 'coding', 'javascript', `${isAdmin}`, `${isMentor}`]);
 };
 
@@ -168,8 +168,8 @@ const session4 = {
   status: 'pending',
 };
 
-const sessionCreater = (sessionId, mentorId, menteeId, questions, menteeEmail, status) => {
-  pool.query('INSERT INTO sessions (sessionId, mentorId, menteeId, questions, menteeEmail, status) VALUES($1, $2, $3, $4, $5, $6) RETURNING *',
+const sessionCreater = async (sessionId, mentorId, menteeId, questions, menteeEmail, status) => {
+  await pool.query('INSERT INTO sessions (sessionId, mentorId, menteeId, questions, menteeEmail, status) VALUES($1, $2, $3, $4, $5, $6) RETURNING *',
     [sessionId, mentorId, menteeId, questions, menteeEmail, status]);
 };
 
