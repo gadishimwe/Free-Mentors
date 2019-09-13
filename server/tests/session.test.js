@@ -8,6 +8,7 @@ chai.use(chaiHttp);
 const user3Token = process.env.User3;
 const user4Token = process.env.User4;
 const mentor4Token = process.env.Mentor4;
+const mentor5Token = process.env.Mentor5;
 
 describe('Testing requesting mentorship session', () => {
   it('should return MentorId is required. Please provide it', (done) => {
@@ -81,10 +82,10 @@ describe('Testing mentor can accept session request', () => {
         done();
       });
   });
-  it('should return This session is already accepted', (done) => {
+  it('should return This session is already accepted or declined', (done) => {
     chai.request(app)
       .patch('/api/v1/sessions/2000/accept')
-      .set('Authorization', mentor4Token)
+      .set('Authorization', mentor5Token)
       .end((err, res) => {
         expect(res).to.have.status(422);
         done();
@@ -94,6 +95,18 @@ describe('Testing mentor can accept session request', () => {
     chai.request(app)
       .patch('/api/v1/sessions/1000/accept')
       .set('Authorization', mentor4Token)
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.have.property('data');
+        done();
+      });
+  });
+});
+describe('Testing mentor can decline session request', () => {
+  it('should return data property with status of 200', (done) => {
+    chai.request(app)
+      .patch('/api/v1/sessions/4000/reject')
+      .set('Authorization', mentor5Token)
       .end((err, res) => {
         expect(res).to.have.status(200);
         expect(res.body).to.have.property('data');

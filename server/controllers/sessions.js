@@ -28,12 +28,13 @@ export const sessionAccept = async (req, res) => {
     data: acceptedSession,
   });
 };
-export const sessionDecline = (req, res) => {
-  const sessionRej = sessions.find((sssnR) => sssnR.sessionId === parseInt(req.params.sessionId, 10));
-  sessionRej.status = 'rejected';
+export const sessionDecline = async (req, res) => {
+  const status = 'rejected';
+  const rejectedSession = await update('sessions', `status='${status}'`, `sessionid='${req.params.sessionId}'`);
+  rejectedSession.status = 'rejected';
   res.status(200).json({
     status: 200,
-    data: sessionRej,
+    data: rejectedSession,
   });
 };
 export const allSessions = (req, res) => {

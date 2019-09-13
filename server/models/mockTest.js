@@ -56,11 +56,11 @@ const user1 = {
   email: 'user1@gmail.com',
   password: 'user1123',
 };
-// const user2 = {
-//   userid: 2000,
-//   email: 'user2@gmail.com',
-//   password: 'user2123',
-// };
+const user2 = {
+  userid: 2000,
+  email: 'user2@gmail.com',
+  password: 'user2123',
+};
 const user3 = {
   userid: 3000,
   email: 'user3@gmail.com',
@@ -71,27 +71,27 @@ const user4 = {
   email: 'user4@gmail.com',
   password: 'user4123',
 };
-// const user5 = {
-//   userid: 5000,
-//   email: 'user5@gmail.com',
-//   password: 'user5123',
-// };
-// const user6 = {
-//   userid: 6000,
-//   email: 'user6@gmail.com',
-//   password: 'user6123',
-// };
+const user5 = {
+  userid: 5000,
+  email: 'user5@gmail.com',
+  password: 'user5123',
+};
+const user6 = {
+  userid: 6000,
+  email: 'user6@gmail.com',
+  password: 'user6123',
+};
 
-// const mentor1 = {
-//   userid: 1001,
-//   email: 'mentor1@gmail.com',
-//   password: 'mentor1123',
-// };
-// const mentor2 = {
-//   userid: 2002,
-//   email: 'mentor2@gmail.com',
-//   password: 'mentor2123',
-// };
+const mentor1 = {
+  userid: 1001,
+  email: 'mentor1@gmail.com',
+  password: 'mentor1123',
+};
+const mentor2 = {
+  userid: 2002,
+  email: 'mentor2@gmail.com',
+  password: 'mentor2123',
+};
 const mentor3 = {
   userid: 3003,
   email: 'mentor3@gmail.com',
@@ -102,16 +102,16 @@ const mentor4 = {
   email: 'mentor4@gmail.com',
   password: 'mentor4123',
 };
-// const mentor5 = {
-//   userid: 5005,
-//   email: 'mentor5@gmail.com',
-//   password: 'mentor5123',
-// };
-// const mentor6 = {
-//   userid: 6006,
-//   email: 'mentor6@gmail.com',
-//   password: 'mentor6123',
-// };
+const mentor5 = {
+  userid: 5005,
+  email: 'mentor5@gmail.com',
+  password: 'mentor5123',
+};
+const mentor6 = {
+  userid: 6006,
+  email: 'mentor6@gmail.com',
+  password: 'mentor6123',
+};
 
 const userCreater = async (userid, email, password, isAdmin, isMentor) => {
   const hashedPassword = await bcrypt.hash(`${password}`, 10);
@@ -122,18 +122,18 @@ const userCreater = async (userid, email, password, isAdmin, isMentor) => {
 userCreater(admin.userid, admin.email, admin.password, true, false);
 
 userCreater(user1.userid, user1.email, user1.password, false, false);
-// userCreater(user2.userid, user2.email, user2.password, false, false);
+userCreater(user2.userid, user2.email, user2.password, false, false);
 userCreater(user3.userid, user3.email, user3.password, false, false);
 userCreater(user4.userid, user4.email, user4.password, false, false);
-// userCreater(user5.userid, user5.email, user5.password, false, false);
-// userCreater(user6.userid, user6.email, user6.password, false, false);
+userCreater(user5.userid, user5.email, user5.password, false, false);
+userCreater(user6.userid, user6.email, user6.password, false, false);
 
-// userCreater(mentor1.userid, mentor1.email, mentor1.password, false, true);
-// userCreater(mentor2.userid, mentor2.email, mentor2.password, false, true);
+userCreater(mentor1.userid, mentor1.email, mentor1.password, false, true);
+userCreater(mentor2.userid, mentor2.email, mentor2.password, false, true);
 userCreater(mentor3.userid, mentor3.email, mentor3.password, false, true);
 userCreater(mentor4.userid, mentor4.email, mentor4.password, false, true);
-// userCreater(mentor5.userid, mentor5.email, mentor5.password, false, true);
-// userCreater(mentor6.userid, mentor6.email, mentor6.password, false, true);
+userCreater(mentor5.userid, mentor5.email, mentor5.password, false, true);
+userCreater(mentor6.userid, mentor6.email, mentor6.password, false, true);
 
 const session1 = {
   sessionId: 1000,
@@ -145,7 +145,7 @@ const session1 = {
 };
 const session2 = {
   sessionId: 2000,
-  mentorId: 4004,
+  mentorId: 5005,
   menteeId: 5000,
   questions: 'how can you.....?',
   menteeEmail: 'user5@gmail.com',
@@ -153,11 +153,19 @@ const session2 = {
 };
 const session3 = {
   sessionId: 3000,
-  mentorId: 4004,
+  mentorId: 6006,
   menteeId: 6000,
   questions: 'how can you.....?',
   menteeEmail: 'user6@gmail.com',
   status: 'rejected',
+};
+const session4 = {
+  sessionId: 4000,
+  mentorId: 5005,
+  menteeId: 2000,
+  questions: 'how can you.....?',
+  menteeEmail: 'user2@gmail.com',
+  status: 'pending',
 };
 
 const sessionCreater = (sessionId, mentorId, menteeId, questions, menteeEmail, status) => {
@@ -169,3 +177,4 @@ sessionCreater(session1.sessionId, session1.mentorId, session1.menteeId, session
 sessionCreater(session2.sessionId, session2.mentorId, session2.menteeId, session2.questions, session2.menteeEmail, session2.status);
 sessionCreater(session3.sessionId, session3.mentorId, session3.menteeId, session3.questions, session3.menteeEmail, session3.status);
 sessionCreater(session3.sessionId, session3.mentorId, session3.menteeId, session3.questions, session3.menteeEmail, session3.status);
+sessionCreater(session4.sessionId, session4.mentorId, session4.menteeId, session4.questions, session4.menteeEmail, session4.status);
