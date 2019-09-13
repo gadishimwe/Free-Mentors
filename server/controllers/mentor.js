@@ -1,6 +1,4 @@
 import { update, select } from '../helpers/sqlQuery';
-import mentors from '../models/mentors';
-
 
 export const userChangeToMentor = async (req, res) => {
   await update('users', `ismentor=${true}`, `userid='${req.params.userId}'`);

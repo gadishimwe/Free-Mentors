@@ -48,7 +48,7 @@ describe('Testing changing user to mentor', () => {
   });
   it('should return User account changed to mentor', (done) => {
     chai.request(app)
-      .patch('/api/v1/user/2000')
+      .patch('/api/v1/user/1000')
       .set('Authorization', adminToken)
       .end((err, res) => {
         expect(res).to.have.status(200);
@@ -80,7 +80,7 @@ describe('Testing viewing specific mentor', () => {
   });
   it('should return property data with status of 200', (done) => {
     chai.request(app)
-      .get('/api/v1/mentors/2002')
+      .get('/api/v1/mentors/3003')
       .set('Authorization', user1Token)
       .end((err, res) => {
         expect(res).to.have.status(200);

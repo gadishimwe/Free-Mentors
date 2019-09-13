@@ -1,4 +1,4 @@
-import { select, insert } from '../helpers/sqlQuery';
+import { select, insert, update } from '../helpers/sqlQuery';
 
 export const sessionRequest = async (req, res) => {
   const user = await select('userid', 'users', `userid='${req.userData.userId}'`);
@@ -19,12 +19,13 @@ export const sessionRequest = async (req, res) => {
     data: session,
   });
 };
-export const sessionAccept = (req, res) => {
-  const sessionAcc = sessions.find((sssnA) => sssnA.sessionId === parseInt(req.params.sessionId, 10));
-  sessionAcc.status = 'accepted';
+export const sessionAccept = async (req, res) => {
+  const status = 'accepted';
+  const acceptedSession = await update('sessions', `status='${status}'`, `sessionid='${req.params.sessionId}'`);
+  acceptedSession.status = 'accepted';
   res.status(200).json({
     status: 200,
-    data: sessionAcc,
+    data: acceptedSession,
   });
 };
 export const sessionDecline = (req, res) => {
