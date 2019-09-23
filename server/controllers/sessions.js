@@ -37,17 +37,11 @@ export const sessionDecline = async (req, res) => {
     data: rejectedSession,
   });
 };
-export const allSessions = (req, res) => {
-  if (req.userData.isMentor) {
-    const mentor = mentors.find((mentr) => mentr.email === req.userData.email);
-    return res.status(200).json({
-      status: 200,
-      data: sessions.filter((session) => session.mentorId === mentor.mentorId),
-    });
-  }
+export const allSessions = async (req, res) => {
+  const sessions = await select('*', 'sessions', `mentorid='${req.userData.userId}' OR menteeid='${req.userData.userId}'`);
   res.status(200).json({
     status: 200,
-    data: sessions.filter((session) => session.menteeId === parseInt(req.userData.userId, 10)),
+    data: sessions,
   });
 };
 export const reviewMentor = (req, res) => {
