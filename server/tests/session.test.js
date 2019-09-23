@@ -114,3 +114,15 @@ describe('Testing mentor can decline session request', () => {
       });
   });
 });
+describe('Testing users can view all their mentorship sessions', () => {
+  it('should return data property with status of 200', (done) => {
+    chai.request(app)
+      .get('/api/v1/sessions')
+      .set('Authorization', mentor5Token)
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.have.property('data');
+        done();
+      });
+  });
+});

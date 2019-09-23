@@ -175,6 +175,6 @@ const sessionCreater = async (sessionId, mentorId, menteeId, questions, menteeEm
 
 sessionCreater(session1.sessionId, session1.mentorId, session1.menteeId, session1.questions, session1.menteeEmail, session1.status);
 sessionCreater(session2.sessionId, session2.mentorId, session2.menteeId, session2.questions, session2.menteeEmail, session2.status);
-sessionCreater(session3.sessionId, session3.mentorId, session3.menteeId, session3.questions, session3.menteeEmail, session3.status);
+
 sessionCreater(session3.sessionId, session3.mentorId, session3.menteeId, session3.questions, session3.menteeEmail, session3.status);
 sessionCreater(session4.sessionId, session4.mentorId, session4.menteeId, session4.questions, session4.menteeEmail, session4.status);
