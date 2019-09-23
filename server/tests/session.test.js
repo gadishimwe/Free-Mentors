@@ -126,3 +126,63 @@ describe('Testing users can view all their mentorship sessions', () => {
       });
   });
 });
+describe('Testing user can review mentor after mentorship session', () => {
+  it('should return This session does not exist', (done) => {
+    chai.request(app)
+      .post('/api/v1/sessions/300/review')
+      .set('Authorization', user4Token)
+      .end((err, res) => {
+        expect(res).to.have.status(404);
+        done();
+      });
+  });
+  it('should return You do not have a session with this mentor yet', (done) => {
+    chai.request(app)
+      .post('/api/v1/sessions/3000/review')
+      .set('Authorization', user4Token)
+      .end((err, res) => {
+        expect(res).to.have.status(404);
+        done();
+      });
+  });
+  it('should return score is required,please provide it', (done) => {
+    chai.request(app)
+      .post('/api/v1/sessions/1000/review')
+      .set('Authorization', user4Token)
+      .end((err, res) => {
+        expect(res).to.have.status(400);
+        done();
+      });
+  });
+  it('should return score must 1 to 5, please enter valid score', (done) => {
+    chai.request(app)
+      .post('/api/v1/sessions/1000/review')
+      .set('Authorization', user4Token)
+      .send({ score: 'we' })
+      .end((err, res) => {
+        expect(res).to.have.status(400);
+        done();
+      });
+  });
+  it('should return remark is required,please provide it', (done) => {
+    chai.request(app)
+      .post('/api/v1/sessions/1000/review')
+      .set('Authorization', user4Token)
+      .send({ score: 3 })
+      .end((err, res) => {
+        expect(res).to.have.status(400);
+        done();
+      });
+  });
+  it('should return property data with status of 200', (done) => {
+    chai.request(app)
+      .post('/api/v1/sessions/1000/review')
+      .set('Authorization', user4Token)
+      .send({ score: 3, remark: 'you have to ...' })
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.have.property('data');
+        done();
+      });
+  });
+});

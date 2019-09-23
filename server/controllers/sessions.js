@@ -1,4 +1,5 @@
 import { select, insert, update } from '../helpers/sqlQuery';
+import { Session } from 'inspector';
 
 export const sessionRequest = async (req, res) => {
   const user = await select('userid', 'users', `userid='${req.userData.userId}'`);
@@ -44,21 +45,22 @@ export const allSessions = async (req, res) => {
     data: sessions,
   });
 };
-export const reviewMentor = (req, res) => {
-  const session = sessions.find((sssn) => parseInt(req.params.sessionId, 10) === sssn.sessionId);
-  const user = users.find((usr) => usr.userId === parseInt(req.userData.userId, 10));
+export const reviewMentor = async (req, res) => {
+  const session = await select('*', 'sessions', `sessionid='${req.params.sessionId}' AND menteeid='${req.userData.userId}'`);
+  const user = await select('firstname, lastname', 'users', `userid='${req.userData.userId}'`);
   const newReview = {
     sessionId: parseInt(req.params.sessionId, 10),
-    mentorId: session.mentorId,
-    menteeId: session.menteeId,
+    mentorId: session[0].mentorid,
+    menteeId: session[0].menteeid,
     score: parseInt(req.body.score, 10),
-    menteeFullName: `${user.firstName} ${user.lastName}`,
+    menteeFullName: `${user[0].firstname} ${user[0].lastname}`,
     remark: req.body.remark,
   };
-  reviews.push(newReview);
+  const rows = await insert('reviews', 'sessionId, mentorId, menteeId, score, menteeFullName, remark', '$1, $2, $3, $4, $5, $6',
+    [newReview.sessionId, newReview.mentorId, newReview.menteeId, newReview.score, newReview.menteeFullName, newReview.remark]);
   res.status(200).json({
     status: 200,
-    data: newReview,
+    data: rows,
   });
 };
 export const deleteReview = (req, res) => {
