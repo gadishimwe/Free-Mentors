@@ -7,8 +7,10 @@ chai.use(chaiHttp);
 
 const user3Token = process.env.User3;
 const user4Token = process.env.User4;
+const user6Token = process.env.User6;
 const mentor4Token = process.env.Mentor4;
 const mentor5Token = process.env.Mentor5;
+const adminToken = process.env.Admin;
 
 describe('Testing requesting mentorship session', () => {
   it('should return MentorId is required. Please provide it', (done) => {
@@ -139,9 +141,9 @@ describe('Testing user can review mentor after mentorship session', () => {
   it('should return You do not have a session with this mentor yet', (done) => {
     chai.request(app)
       .post('/api/v1/sessions/3000/review')
-      .set('Authorization', user4Token)
+      .set('Authorization', user6Token)
       .end((err, res) => {
-        expect(res).to.have.status(404);
+        expect(res).to.have.status(401);
         done();
       });
   });
@@ -182,6 +184,26 @@ describe('Testing user can review mentor after mentorship session', () => {
       .end((err, res) => {
         expect(res).to.have.status(200);
         expect(res.body).to.have.property('data');
+        done();
+      });
+  });
+});
+describe('Testing admin can delete a review', () => {
+  it('should return This review does not exist', (done) => {
+    chai.request(app)
+      .delete('/api/v1/sessions/300/review')
+      .set('Authorization', adminToken)
+      .end((err, res) => {
+        expect(res).to.have.status(404);
+        done();
+      });
+  });
+  it('should return Review successfully deleted', (done) => {
+    chai.request(app)
+      .delete('/api/v1/sessions/1000/review')
+      .set('Authorization', adminToken)
+      .end((err, res) => {
+        expect(res).to.have.status(200);
         done();
       });
   });

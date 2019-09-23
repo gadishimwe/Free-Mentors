@@ -1,8 +1,8 @@
-import reviews from '../models/reviews';
+import { select } from '../helpers/sqlQuery';
 
-export default (req, res, next) => {
-  const review = reviews.find((rvw) => rvw.sessionId === parseInt(req.params.sessionId, 10));
-  if (!review) {
+export default async (req, res, next) => {
+  const isReviewExist = await select('*', 'reviews', `sessionid='${req.params.sessionId}'`);
+  if (!isReviewExist[0]) {
     return res.status(404).json({
       status: 404,
       error: 'This review does not exist',

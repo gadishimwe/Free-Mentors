@@ -1,5 +1,4 @@
-import { select, insert, update } from '../helpers/sqlQuery';
-import { Session } from 'inspector';
+import { select, insert, update, deletes } from '../helpers/sqlQuery';
 
 export const sessionRequest = async (req, res) => {
   const user = await select('userid', 'users', `userid='${req.userData.userId}'`);
@@ -63,10 +62,8 @@ export const reviewMentor = async (req, res) => {
     data: rows,
   });
 };
-export const deleteReview = (req, res) => {
-  const review = reviews.find((rvw) => rvw.sessionId === parseInt(req.params.sessionId, 10));
-  const reviewIndex = reviews.findIndex((rvw) => rvw.sessionId === review.sessionId);
-  reviews.splice(reviewIndex, 1);
+export const deleteReview = async (req, res) => {
+  await deletes('reviews', `sessionid='${req.params.sessionId}'`);
   res.status(200).json({
     status: 200,
     data: {
