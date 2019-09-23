@@ -16,3 +16,8 @@ export const update = async (table, columns, condition) => {
   const { rows } = await pool.query(`UPDATE ${table} SET ${columns} WHERE ${condition} RETURNING *;`);
   return rows[0];
 };
+
+export const deletes = async (table, condition) => {
+  const { rows } = await pool.query(`DELETE FROM ${table} WHERE ${condition} RETURNING *;`);
+  return rows[0];
+};

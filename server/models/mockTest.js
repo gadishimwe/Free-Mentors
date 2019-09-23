@@ -30,6 +30,7 @@ const createTables = `
         status VARCHAR(10) NOT NULL
     );
     CREATE TABLE IF NOT EXISTS reviews(
+        reviewId SERIAL PRIMARY KEY,
         sessionId INT NOT NULL,
         mentorId INT NOT NULL,
         menteeId INT NOT NULL,
