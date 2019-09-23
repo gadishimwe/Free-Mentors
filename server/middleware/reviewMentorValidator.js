@@ -1,21 +1,17 @@
-import sessions from '../models/sessions';
-import users from '../models/users';
-import mentors from '../models/mentors';
+import { select } from '../helpers/sqlQuery';
 
-export default (req, res, next) => {
-  const session = sessions.find((sssn) => parseInt(req.params.sessionId, 10) === sssn.sessionId);
-  const user = users.find((usr) => usr.userId === parseInt(req.userData.userId, 10));
-  if (!session) {
+export default async (req, res, next) => {
+  const isSessionExist = await select('*', 'sessions', `sessionid='${req.params.sessionId}' AND menteeid='${req.userData.userId}'`);
+  if (!isSessionExist[0]) {
     return res.status(404).json({
       status: 404,
       error: 'This session does not exist.',
     });
   }
-  const mentor = mentors.find((mntr) => mntr.mentorId === session.mentorId);
-  if (session.menteeId !== user.userId || session.status !== 'accepted') {
+  if (isSessionExist[0].status !== 'accepted') {
     return res.status(401).json({
       status: 401,
-      error: `You don't have a session with ${mentor.firstName}`,
+      error: 'You don\'t have a session with this mentor yet',
     });
   }
   if (!req.body.score) {
